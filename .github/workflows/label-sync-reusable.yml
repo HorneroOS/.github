@@ -1,0 +1,68 @@
+# Reusable additive label sync.
+#
+# Thin callers in each maintained HorneroOS repository invoke this with
+# their own GITHUB_TOKEN (issues:write), so every repo converges on the
+# canonical taxonomy in governance/labels.yml without any cross-repo
+# PAT. Sync stays ADDITIVE: missing canonical labels are created,
+# descriptions/colors refreshed, repo-specific labels never deleted.
+#
+# Propagation is pull-based: callers run on a weekly schedule plus
+# workflow_dispatch, so taxonomy edits land everywhere within days, or
+# immediately on manual dispatch. See governance/docs/defaults.md.
+
+name: label-sync (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      engine-ref:
+        description: "Pinned ref (full commit SHA) of HorneroOS/.github providing the taxonomy and sync script."
+        required: true
+        type: string
+      dry-run:
+        description: "Print planned actions without writing labels."
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout label-sync engine
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+        with:
+          repository: HorneroOS/.github
+          ref: ${{ inputs.engine-ref }}
+          path: .governance-engine
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: .governance-engine/governance/label-sync/package-lock.json
+
+      - name: Install label-sync
+        working-directory: .governance-engine/governance/label-sync
+        run: npm ci
+
+      - name: Validate taxonomy and forms
+        working-directory: .governance-engine/governance/label-sync
+        run: npm run validate
+
+      - name: Sync labels (additive, never deletes)
+        working-directory: .governance-engine/governance/label-sync
+        run: npm run sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          LABELS_FILE: ${{ github.workspace }}/.governance-engine/governance/labels.yml
+          DRY_RUN: ${{ inputs.dry-run && '1' || '0' }}
