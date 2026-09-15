@@ -1,0 +1,4 @@
+# Dependencies and build output are never committed.
+node_modules/
+governance/label-sync/node_modules/
+governance/label-sync/dist/

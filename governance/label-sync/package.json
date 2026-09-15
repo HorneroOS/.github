@@ -1,0 +1,24 @@
+{
+  "name": "@horneroos/label-sync",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Additive org label synchronizer and issue-form label validator (TypeScript, strict).",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "validate": "npm run build && node dist/validateForms.js",
+    "sync": "npm run build && node dist/sync.js",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "js-yaml": "4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "4.0.9",
+    "@types/node": "22.7.4",
+    "typescript": "5.6.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

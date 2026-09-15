@@ -1,0 +1,42 @@
+# Additive org-label sync for this repository.
+#
+# Creates labels from governance/labels.yml that are missing here and
+# refreshes descriptions/colors. NEVER deletes labels: repository-specific
+# labels are preserved. Other HorneroOS repositories get the same behavior
+# through their own thin caller workflows (see governance/docs/defaults.md).
+name: label-sync
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - governance/labels.yml
+      - governance/label-sync/**
+      - .github/workflows/label-sync.yml
+  workflow_dispatch:
+
+# Least privilege: read the taxonomy, write issues/labels only.
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: governance/label-sync/package-lock.json
+      - run: npm ci
+        working-directory: governance/label-sync
+      - run: npm run validate
+        working-directory: governance/label-sync
+      - run: npm run sync
+        working-directory: governance/label-sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          LABELS_FILE: ../labels.yml

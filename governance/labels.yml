@@ -1,0 +1,57 @@
+# Canonical organization label taxonomy for HorneroOS.
+#
+# This file is the single source of truth for labels that org-default
+# templates may reference. Issue forms MUST reference only names listed
+# here (verified by `governance/label-sync` validation).
+#
+# The label-sync workflow/script is ADDITIVE: it creates missing labels
+# and updates descriptions/colors, but it NEVER deletes repo-specific
+# labels. Repositories may keep their own extra labels alongside these.
+version: 1
+labels:
+  # Issue kinds. Exactly one per issue; set automatically by issue forms.
+  - name: type:bug
+    description: Something is broken.
+    color: "d73a4a"
+  - name: type:feature
+    description: A new capability or enhancement request.
+    color: "a2eeef"
+  - name: type:docs
+    description: Documentation gap, fix, or improvement.
+    color: "0075ca"
+  - name: type:maintenance
+    description: Chores, refactors, dependency or tooling upkeep.
+    color: "fef2c0"
+  # Scope areas. Optional, at most one per issue.
+  - name: area:governance
+    description: Org defaults, templates, labels, policy tooling.
+    color: "5319e7"
+  - name: area:docs
+    description: Documentation content or site.
+    color: "0075ca"
+  - name: area:ci
+    description: Continuous integration, checks, automation.
+    color: "1d76db"
+  - name: area:security
+    description: Security-sensitive work. Do not post exploits publicly.
+    color: "b60205"
+  - name: area:infra
+    description: Infrastructure, packaging, release plumbing.
+    color: "0e8a16"
+  # Triage state. New org-default issues start at needs-triage.
+  - name: status:needs-triage
+    description: Awaiting maintainer triage.
+    color: "f9d0c4"
+  - name: status:blocked
+    description: Blocked on something outside this issue.
+    color: "000000"
+  # Priority. Set by maintainers during triage, not by reporters.
+  - name: priority:low
+    description: Nice to have; no urgency.
+    color: "c2e0c6"
+  - name: priority:medium
+    description: Should be scheduled normally.
+    color: "fbca04"
+  - name: priority:high
+    description: Urgent or blocking.
+    color: "b60205"
