@@ -2,10 +2,13 @@ import { Finding, PRContext, fail, warn } from "./types.js";
 
 const WORKFLOW_RE = /(^|\/)\.github\/workflows\/[^/]+\.ya?ml$/;
 /**
- * `uses: owner/repo@<40-hex-sha> # vX.Y.Z` — SHA pin plus version comment —
- * or the engine's own release style `uses: ...@<40-hex-sha> # governance-vX.Y[.Z]`.
+ * `uses: owner/repo@<40-hex-sha> # <version-hint>` — the SHA is the pin;
+ * the trailing comment is an upgrade hint. Accepted hints: full semver
+ * (`# vX.Y.Z`), action-major style (`# v1`, GitHub's own convention for
+ * reusable actions/workflows), or the engine release style
+ * (`# governance-vX.Y[.Z]`).
  */
-const PINNED_RE = /uses:\s*[^\s#]+@[0-9a-f]{40}\s+#\s*(v?\d+\.\d+\.\d+|governance-v\d+(\.\d+){0,2})/;
+const PINNED_RE = /uses:\s*[^\s#]+@[0-9a-f]{40}\s+#\s*(v?\d+(\.\d+){0,2}|governance-v\d+(\.\d+){0,2})/;
 
 /** True for repo-relative paths that are GitHub Actions workflow files. */
 export function isWorkflowFile(file: string): boolean {
@@ -15,9 +18,10 @@ const USES_RE = /uses:\s*([^\s#]+)/g;
 
 /**
  * Release-pinning: third-party GitHub Actions must be pinned to a full
- * commit SHA with a `# vX.Y.Z` version comment (or the engine's own
- * `# governance-vX.Y[.Z]` release style). Floating tags fail.
- * Files without supplied content warn (cannot verify deterministically).
+ * commit SHA with a version hint comment (`# vX.Y.Z`, action-major
+ * `# v1`, or the engine's `# governance-vX.Y[.Z]`). The SHA is the
+ * guarantee; floating refs fail. Files without supplied content warn
+ * (cannot verify deterministically).
  */
 export function checkPins(ctx: PRContext): Finding[] {
   const findings: Finding[] = [];
