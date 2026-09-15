@@ -22,6 +22,44 @@ automatically unless it defines its own file of the same kind.
   workflow): creates missing canonical labels and refreshes
   descriptions/colors; never deletes repository-specific labels.
 
+## Cross-repo label sync (thin callers)
+
+The canonical taxonomy is defined once here. Every maintained
+repository runs it through a thin caller of the reusable workflow
+`.github/workflows/label-sync-reusable.yml`, using its own
+`GITHUB_TOKEN` (`issues: write`) — no cross-repo PAT anywhere:
+
+```yaml
+name: label-sync
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'  # weekly convergence; dispatch manually for immediacy
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Preview without writing'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  sync:
+    # yamllint disable rule:line-length
+    uses: HorneroOS/.github/.github/workflows/label-sync-reusable.yml@<full-SHA>  # governance-vX.Y
+    # yamllint enable rule:line-length
+    with:
+      engine-ref: <same-full-SHA>
+      dry-run: ${{ inputs.dry-run }}
+    permissions:
+      contents: read
+      issues: write
+```
+
+Propagation is pull-based: taxonomy edits converge everywhere within a
+week, or immediately via manual dispatch. The installer repository is
+excluded (read-only handoff, no caller).
+
 ## Conventions
 
 - English everywhere: code, issues, PRs, docs.
