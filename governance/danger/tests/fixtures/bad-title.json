@@ -1,0 +1,18 @@
+{
+  "context": {
+    "title": "fixed stuff",
+    "body": "## Summary\nStuff.\n\n## Type\nFix\n\n## Validation\nManual.\n\n## Risks\nNone.\n\nCloses #7\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 20,
+    "deletions": 5,
+    "changedFiles": ["shell/Foo.qml"],
+    "fileContents": {},
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"]
+  }
+}

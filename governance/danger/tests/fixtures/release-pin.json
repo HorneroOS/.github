@@ -1,0 +1,20 @@
+{
+  "context": {
+    "title": "ci(workflows): add governance check",
+    "body": "## Summary\nWire governance.\n\n## Type\nChore\n\n## Validation\nRan workflow on fork.\n\n## Risks\nCI only.\n\nCloses #3\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 15,
+    "deletions": 2,
+    "changedFiles": [".github/workflows/pr.yml"],
+    "fileContents": {
+      ".github/workflows/pr.yml": "jobs:\n  gov:\n    steps:\n      - uses: actions/checkout@v4\n"
+    },
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"]
+  }
+}

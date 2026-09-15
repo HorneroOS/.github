@@ -1,0 +1,18 @@
+{
+  "context": {
+    "title": "feat(shell): restyle lock screen",
+    "body": "## Summary\nNew lock screen look.\n\n![lock screen](https://example.com/shot.png)\n\n## Type\nFeature\n\n## Validation\nScreenshot above; VM check.\n\n## Risks\nVisual only.\n\nCloses #55\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 80,
+    "deletions": 20,
+    "changedFiles": ["assets/lock.png", "shell/Lock.qml"],
+    "fileContents": {},
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"]
+  }
+}

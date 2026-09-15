@@ -1,0 +1,18 @@
+{
+  "context": {
+    "title": "feat(config): rewrite all defaults",
+    "body": "## Summary\nBig rewrite.\n\n## Type\nFeature\n\n## Validation\nFull test suite.\n\n## Risks\nHigh; touches everything.\n\nCloses #100\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 900,
+    "deletions": 400,
+    "changedFiles": ["config/a.conf", "config/b.conf"],
+    "fileContents": {},
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"]
+  }
+}

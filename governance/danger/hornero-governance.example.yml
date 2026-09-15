@@ -1,0 +1,24 @@
+# Example repo policy: `.github/hornero-governance.yml`
+#
+# Copy this file to `.github/hornero-governance.yml` in any HorneroOS repo
+# and adjust the paths. The Danger engine merges it over safe defaults.
+
+version: 1
+kind: app
+visual_paths:
+  - "assets/**"
+  - "**/*.qml"
+  - "**/*.png"
+generated_paths:
+  - source: "src/api.proto"
+    derivative: "src/api.pb.ts"
+policies:
+  large_threshold: 800
+  forbidden_paths:
+    - "**/.env"
+    - "**/*.pem"
+    - "**/id_rsa*"
+    - "**/credentials*"
+  risky_paths:
+    - ".github/workflows/**"
+    - "governance/**"

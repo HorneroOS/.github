@@ -1,0 +1,15 @@
+# Policy for the shared-config repo itself.
+version: 1
+kind: shared-config
+visual_paths: []
+generated_paths: []
+policies:
+  large_threshold: 800
+  forbidden_paths:
+    - "**/.env"
+    - "**/*.pem"
+    - "**/id_rsa*"
+    - "**/credentials*"
+  risky_paths:
+    - ".github/workflows/**"
+    - "governance/**"

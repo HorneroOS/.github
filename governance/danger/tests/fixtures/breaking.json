@@ -1,0 +1,18 @@
+{
+  "context": {
+    "title": "feat(api)!: drop v1 endpoints",
+    "body": "## Summary\nRemoves v1.\n\nBREAKING CHANGE: v1 endpoints return 410.\n\n## Type\nFeature\n\n## Validation\nIntegration tests.\n\n## Risks\nBreaks old clients.\n\nCloses #77\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 60,
+    "deletions": 200,
+    "changedFiles": ["src/api.ts"],
+    "fileContents": {},
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"]
+  }
+}

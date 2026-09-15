@@ -1,0 +1,61 @@
+# Reusable PR-governance workflow.
+#
+# Callers pin a full commit SHA with a `governance-*` version comment and
+# trigger on `pull_request` (fork-safe: never `pull_request_target` combined
+# with checkout + execution of PR code). Least-privilege permissions below.
+
+name: PR governance (reusable)
+
+"on":
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Pinned Node version for the Danger engine."
+        required: false
+        default: "22.22.0"
+        type: string
+      working-directory:
+        description: "Directory containing the Danger engine checkout."
+        required: false
+        default: "governance/danger"
+        type: string
+      github-token:
+        description: "Token Danger uses to comment (defaults to GITHUB_TOKEN)."
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  danger:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout base (engine source of truth)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: npm
+          cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
+
+      - name: Install engine
+        working-directory: ${{ inputs.working-directory }}
+        run: npm ci
+
+      - name: Typecheck engine
+        working-directory: ${{ inputs.working-directory }}
+        run: npx tsc --noEmit
+
+      - name: Run Danger
+        working-directory: ${{ inputs.working-directory }}
+        env:
+          GITHUB_TOKEN: ${{ inputs.github-token != '' && inputs.github-token || secrets.GITHUB_TOKEN }}
+        run: npx danger ci --dangerfile src/dangerfile.ts

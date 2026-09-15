@@ -1,0 +1,18 @@
+{
+  "context": {
+    "title": "wip stuff",
+    "body": "early draft",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": true,
+    "hasMergeCommits": true,
+    "additions": 50,
+    "deletions": 10,
+    "changedFiles": ["shell/Foo.qml"],
+    "fileContents": {},
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"]
+  }
+}

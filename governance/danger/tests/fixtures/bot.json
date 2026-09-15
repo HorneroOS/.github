@@ -1,0 +1,15 @@
+{
+  "context": {
+    "title": "Bump lodash from 4.17.20 to 4.17.21",
+    "body": "Bump boto bump.",
+    "author": "dependabot[bot]",
+    "isBot": true,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 2,
+    "deletions": 2,
+    "changedFiles": ["package-lock.json"],
+    "fileContents": {},
+    "labels": []
+  }
+}
