@@ -8,9 +8,10 @@
     "hasMergeCommits": false,
     "additions": 4,
     "deletions": 4,
-    "changedFiles": [".github/workflows/pr-governance.yml"],
+    "changedFiles": [".github/workflows/pr-governance.yml", ".github/workflows/aur-publish.yml"],
     "fileContents": {
-      ".github/workflows/pr-governance.yml": "jobs:\n  governance:\n    uses: HorneroOS/.github/.github/workflows/pr-governance.yml@ce0dfa83591969920d14e4cd57a01ccf615a25fc # governance-v1.3\n    with:\n      engine-ref: ce0dfa83591969920d14e4cd57a01ccf615a25fc # governance-v1.3\n"
+      ".github/workflows/pr-governance.yml": "jobs:\n  governance:\n    uses: HorneroOS/.github/.github/workflows/pr-governance.yml@ce0dfa83591969920d14e4cd57a01ccf615a25fc # governance-v1.3\n    with:\n      engine-ref: ce0dfa83591969920d14e4cd57a01ccf615a25fc # governance-v1.3\n",
+      ".github/workflows/aur-publish.yml": "steps:\n      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2\n      - uses: ulises-jeremias/github-actions-aur-publish@507f0dba7755bdc2ad351232405bd7e4cd4a4a67 # v1\n"
     },
     "labels": []
   }
