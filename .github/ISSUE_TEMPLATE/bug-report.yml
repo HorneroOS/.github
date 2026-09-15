@@ -1,0 +1,88 @@
+name: Bug report
+description: Report something broken in a HorneroOS component.
+title: "bug: "
+labels:
+  - type:bug
+  - status:needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please fill in everything you can — it makes
+        triage much faster. Do not post secrets, credentials, or personal data.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is broken, in one or two sentences?
+      placeholder: The shell crashes when I plug in a second monitor.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps that trigger the bug.
+      placeholder: |
+        1. Boot the latest ISO.
+        2. Plug in a second monitor.
+        3. Observe the crash.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected vs. actual behavior
+      description: What did you expect, and what happened instead?
+      placeholder: |
+        Expected: both monitors show the desktop.
+        Actual: the shell exits and returns to the login screen.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Version/commit, hardware, and relevant configuration.
+      placeholder: |
+        - Repo + version/commit:
+        - ISO or install date:
+        - GPU / hardware:
+        - Config changes:
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Paste relevant logs (redact secrets) or describe screenshots.
+      placeholder: Paste backtraces or journal output here.
+      render: text
+    validations:
+      required: false
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area (optional)
+      description: Which area does this belong to, if you know?
+      options:
+        - Not sure
+        - area:governance
+        - area:docs
+        - area:ci
+        - area:security
+        - area:infra
+      default: 0
+    validations:
+      required: false
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for duplicates.
+          required: true
+        - label: I am reporting in the repository that owns this component.
+          required: true
+        - label: I removed secrets, credentials, and personal data.
+          required: true

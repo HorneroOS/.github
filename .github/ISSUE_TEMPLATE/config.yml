@@ -1,0 +1,20 @@
+# Org-default issue configuration.
+#
+# Blank issues are disabled so every report uses one of the three
+# structured forms above. See governance/docs/inheritance-trap.md:
+# repositories MUST NOT add their own local ISSUE_TEMPLATE directory to
+# "extend" these forms — any local directory replaces ALL org defaults.
+blank_issues_enabled: false
+contact_links:
+  - name: Discussions
+    url: https://github.com/HorneroOS/hornero/discussions
+    about: Ask questions and discuss ideas with the community.
+  - name: Documentation
+    url: https://github.com/HorneroOS/docs
+    about: Start with the official documentation.
+  - name: Contributing guide
+    url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+    about: How to contribute, PR conventions, and reporting guidance.
+  - name: Security policy
+    url: https://github.com/HorneroOS/.github/blob/main/SECURITY.md
+    about: How to report a vulnerability privately. Do not open public issues for security reports.
