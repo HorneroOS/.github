@@ -1,6 +1,11 @@
 import { Finding, PRContext, fail, warn } from "./types.js";
 
 const WORKFLOW_RE = /(^|\/)\.github\/workflows\/[^/]+\.ya?ml$/;
+
+/** True for repo-relative paths that are GitHub Actions workflow files. */
+export function isWorkflowFile(file: string): boolean {
+  return WORKFLOW_RE.test(file);
+}
 /** `uses: owner/repo@<40-hex-sha> # vX.Y.Z` — SHA pin plus version comment. */
 const PINNED_RE = /uses:\s*[^\s#]+@[0-9a-f]{40}\s+#\s*v?\d+\.\d+\.\d+/;
 const USES_RE = /uses:\s*([^\s#]+)/g;
@@ -13,7 +18,7 @@ const USES_RE = /uses:\s*([^\s#]+)/g;
 export function checkPins(ctx: PRContext): Finding[] {
   const findings: Finding[] = [];
   for (const file of ctx.changedFiles) {
-    if (!WORKFLOW_RE.test(file)) continue;
+    if (!isWorkflowFile(file)) continue;
     const content = ctx.fileContents[file];
     if (content === undefined) {
       findings.push(

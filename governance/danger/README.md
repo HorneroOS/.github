@@ -49,8 +49,13 @@ least-privilege permissions, and the engine never executes PR code.
 2. The reusable workflow (`.github/workflows/pr-governance.yml`) is consumed
    by call-site workflows pinned to a full commit SHA with a version comment:
    `uses: HorneroOS/.github/.github/workflows/pr-governance.yml@<SHA> # governance-vX.Y.Z`.
-3. To upgrade: bump the SHA + version comment in the caller, run the caller's
-   CI, and confirm Danger posts the expected findings. Never float on a branch.
+   Callers also pass the same SHA as `with: engine-ref: <SHA>` so the
+   workflow checks out the versioned engine source next to the caller repo.
+   Danger runs with cwd at the caller repo (diff + repo policy come from
+   there); the engine checkout is code-only and never executes PR code.
+3. To upgrade: bump the SHA + version comment (both `uses:` and
+   `engine-ref:`) in the caller, run the caller's CI, and confirm Danger
+   posts the expected findings. Never float on a branch.
 
 ## Develop
 

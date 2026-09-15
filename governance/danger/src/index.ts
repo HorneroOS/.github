@@ -43,4 +43,4 @@ export function evaluatePR(ctx: PRContext, policy: RepoPolicy): Finding[] {
   return findings;
 }
 
-export { defaultPolicy, parsePolicy } from "./policy.js";
+export { defaultPolicy, parsePolicy, loadPolicy } from "./policy.js";

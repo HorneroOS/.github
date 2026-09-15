@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { evaluatePR } from "../src/index.js";
-import { defaultPolicy } from "../src/policy.js";
+import { defaultPolicy, loadPolicy } from "../src/policy.js";
 import type { Finding, PRContext, RepoPolicy } from "../src/types.js";
 
 const here = __dirname;
@@ -92,5 +92,37 @@ void describe("HorneroOS PR-governance engine", () => {
     const { findings } = load("release-pin");
     assert.ok(rules(findings, "fail").includes("action-pin"));
     assert.ok(rules(findings, "warn").includes("risky-area"));
+  });
+
+  void it("loadPolicy: HORNERO_POLICY_PATH override wins over defaults", () => {
+    const dir = fs.mkdtempSync(path.join(fs.realpathSync("/tmp"), "gov-policy-"));
+    const file = path.join(dir, "custom.yml");
+    fs.writeFileSync(
+      file,
+      "version: 1\nkind: shell\nvisual_paths:\n  - 'waybar/**'\npolicies:\n  large_threshold: 123\n",
+      "utf8",
+    );
+    const policy = loadPolicy({ HORNERO_POLICY_PATH: file }, dir);
+    assert.equal(policy.kind, "shell");
+    assert.equal(policy.largeThreshold, 123);
+    assert.deepEqual(policy.visualPaths, ["waybar/**"]);
+    fs.rmSync(dir, { recursive: true, force: true });
+  });
+
+  void it("loadPolicy: missing file falls back to defaults", () => {
+    const policy = loadPolicy(
+      { HORNERO_POLICY_PATH: "/nonexistent/hornero-governance.yml" },
+      "/tmp",
+    );
+    assert.deepEqual(policy, defaultPolicy());
+  });
+
+  void it("loadPolicy: malformed file falls back to defaults", () => {
+    const dir = fs.mkdtempSync(path.join(fs.realpathSync("/tmp"), "gov-policy-"));
+    const file = path.join(dir, "broken.yml");
+    fs.writeFileSync(file, "version: [unclosed\n\tbad: : :\n", "utf8");
+    const policy = loadPolicy({ HORNERO_POLICY_PATH: file }, dir);
+    assert.deepEqual(policy, defaultPolicy());
+    fs.rmSync(dir, { recursive: true, force: true });
   });
 });

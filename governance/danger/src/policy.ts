@@ -1,3 +1,6 @@
+import * as fs from "node:fs";
+import * as path from "node:path";
+import yaml from "js-yaml";
 import { RepoPolicy } from "./types.js";
 
 /**
@@ -95,4 +98,36 @@ export function parsePolicy(raw: unknown): RepoPolicy {
       base.largeThreshold,
     ),
   };
+}
+
+/**
+ * Load the repo policy for a Danger run.
+ *
+ * Resolution order: `HORNERO_POLICY_PATH` (absolute, or relative to
+ * `rootDir`) wins so a shared engine checkout can govern a *caller* repo;
+ * otherwise the conventional `.github/hornero-governance.yml[.yaml]`
+ * candidates under `rootDir` are tried. Missing or unparsable files fall
+ * back to `defaultPolicy()` — governance degrades to warn-only defaults,
+ * never to silence.
+ */
+export function loadPolicy(
+  env: NodeJS.ProcessEnv = process.env,
+  rootDir: string = process.cwd(),
+): RepoPolicy {
+  const override = env["HORNERO_POLICY_PATH"];
+  const candidates =
+    typeof override === "string" && override.length > 0
+      ? [path.resolve(rootDir, override)]
+      : [".github/hornero-governance.yml", ".github/hornero-governance.yaml"].map(
+          (rel) => path.join(rootDir, rel),
+        );
+  for (const abs of candidates) {
+    if (!fs.existsSync(abs)) continue;
+    try {
+      return parsePolicy(yaml.load(fs.readFileSync(abs, "utf8")));
+    } catch {
+      return defaultPolicy();
+    }
+  }
+  return defaultPolicy();
 }

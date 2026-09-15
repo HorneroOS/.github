@@ -8,27 +8,10 @@
 import { danger, fail, warn, message } from "danger";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import yaml from "js-yaml";
-import { evaluatePR, defaultPolicy, parsePolicy } from "./index.js";
+import { evaluatePR, loadPolicy } from "./index.js";
 import { isBotAuthor } from "./bots.js";
-import type { PRContext, RepoPolicy } from "./types.js";
-
-function loadPolicy(): RepoPolicy {
-  const candidates = [
-    ".github/hornero-governance.yml",
-    ".github/hornero-governance.yaml",
-  ];
-  for (const rel of candidates) {
-    const abs = path.join(process.cwd(), rel);
-    if (!fs.existsSync(abs)) continue;
-    try {
-      return parsePolicy(yaml.load(fs.readFileSync(abs, "utf8")));
-    } catch {
-      return defaultPolicy();
-    }
-  }
-  return defaultPolicy();
-}
+import { isWorkflowFile } from "./pins.js";
+import type { PRContext } from "./types.js";
 
 function str(v: unknown): string {
   return typeof v === "string" ? v : "";
@@ -79,6 +62,19 @@ function buildContext(): PRContext {
         ? diffStats["deletions"]
         : 0;
   const author = str(user["login"]);
+  // Pin checks need the text of changed workflow files. Danger runs with
+  // cwd at the repo under review, so read them from disk (read-only);
+  // files unreadable from disk (e.g. deleted) stay absent and the pin
+  // rule reports them as unverifiable instead of failing.
+  const fileContents: Record<string, string> = {};
+  for (const file of changedFiles) {
+    if (!isWorkflowFile(file)) continue;
+    try {
+      fileContents[file] = fs.readFileSync(path.join(process.cwd(), file), "utf8");
+    } catch {
+      // Leave absent; checkPins warns on missing content.
+    }
+  }
   return {
     title: str(pr["title"]),
     body: str(pr["body"]),
@@ -89,9 +85,7 @@ function buildContext(): PRContext {
     additions,
     deletions,
     changedFiles,
-    // Workflow contents are loaded by callers that need pin checks; the
-    // Danger DSL file snapshot stays out of the hot path on purpose.
-    fileContents: {},
+    fileContents,
     labels,
   };
 }
