@@ -6,8 +6,13 @@
  * duplication — pure policy functions from `src/` decide everything.
  */
 import { danger, fail, warn, message } from "danger";
-import * as fs from "node:fs";
-import * as path from "node:path";
+// NOTE: plain `require` (not `import *`) on purpose. Danger loads this file
+// through cleanDangerfile + require-from-string, and cleanDangerfile's
+// require("danger") pattern swallows every line from the first `var` down
+// to the danger import — including tsc-emitted `__importStar` helpers.
+// Helper-free output keeps the loaded module intact.
+import fs = require("node:fs");
+import path = require("node:path");
 import { evaluatePR, loadPolicy } from "./index.js";
 import { isBotAuthor } from "./bots.js";
 import { isWorkflowFile } from "./pins.js";
