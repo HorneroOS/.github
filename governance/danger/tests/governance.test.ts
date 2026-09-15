@@ -29,6 +29,13 @@ void describe("HorneroOS PR-governance engine", () => {
     const { findings } = load("good-feature");
     assert.deepEqual(rules(findings, "fail"), []);
     assert.ok(rules(findings, "message").includes("docs-links"));
+    // Fixture uses the template's conventional-commit vocabulary ("feat").
+    assert.ok(!rules(findings, "warn").includes("body-type"));
+  });
+
+  void it("gov-pin: engine release-pin style passes pin check", () => {
+    const { findings } = load("gov-pin");
+    assert.ok(!rules(findings, "fail").includes("action-pin"));
   });
 
   void it("bad-title: deterministic fail on non-conventional title", () => {

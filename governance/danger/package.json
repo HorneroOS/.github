@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "npm run build && cp -r tests/fixtures dist/tests/fixtures && node --test dist/tests/*.test.js",
+    "clean": "rm -rf dist",
+    "test": "npm run clean && npm run build && cp -r tests/fixtures dist/tests/fixtures && node --test dist/tests/*.test.js",
     "danger": "danger ci"
   },
   "dependencies": {

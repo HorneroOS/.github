@@ -43,7 +43,9 @@ export function detectSections(body: string): Record<string, string> {
   return out;
 }
 
-const PR_TYPES = ["feature", "fix", "docs", "refactor", "chore"];
+// Template vocabulary is conventional-commit style ("One of: feat, fix,
+// docs, refactor, chore"); "feature" stays as an accepted alias.
+const PR_TYPES = ["feat", "feature", "fix", "docs", "refactor", "chore"];
 
 /** Human-hygiene sections: skipped for bots, reduced on drafts. */
 export function checkSections(ctx: PRContext): Finding[] {

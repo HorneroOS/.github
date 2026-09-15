@@ -1,0 +1,17 @@
+{
+  "context": {
+    "title": "chore(governance): repin engine to governance-v1.3",
+    "body": "## Summary\n\nRepin.\n\n## Type\n\nchore\n\n## Validation\n\nCI.\n\n## Risks\n\nNone.\n\nCloses #1\n",
+    "author": "dev",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 4,
+    "deletions": 4,
+    "changedFiles": [".github/workflows/pr-governance.yml"],
+    "fileContents": {
+      ".github/workflows/pr-governance.yml": "jobs:\n  governance:\n    uses: HorneroOS/.github/.github/workflows/pr-governance.yml@ce0dfa83591969920d14e4cd57a01ccf615a25fc # governance-v1.3\n    with:\n      engine-ref: ce0dfa83591969920d14e4cd57a01ccf615a25fc # governance-v1.3\n"
+    },
+    "labels": []
+  }
+}
