@@ -1,0 +1,19 @@
+{
+  "context": {
+    "title": "feat(api): extend schema",
+    "body": "## Summary\nNew field.\n\n## Type\nFeature\n\n## Validation\n`npm test`.\n\n## Risks\nLow.\n\nCloses #31\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 40,
+    "deletions": 5,
+    "changedFiles": ["src/api.proto"],
+    "fileContents": {},
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"],
+    "generatedPairs": [{ "source": "src/api.proto", "derivative": "src/api.pb.ts" }]
+  }
+}

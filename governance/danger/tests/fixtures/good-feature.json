@@ -1,0 +1,18 @@
+{
+  "context": {
+    "title": "feat(shell): add volume slider to quick settings",
+    "body": "## Summary\nAdds a volume slider to quick settings.\n\n## Type\nFeature\n\n## Validation\nRan `npm test` in shell repo; manual VM check.\n\n## Risks\nLow; UI-only change.\n\nCloses #42\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 120,
+    "deletions": 30,
+    "changedFiles": ["shell/QuickSettings.qml"],
+    "fileContents": {},
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"]
+  }
+}

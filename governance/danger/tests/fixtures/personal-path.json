@@ -1,0 +1,18 @@
+{
+  "context": {
+    "title": "fix(deploy): point at prod env",
+    "body": "## Summary\nUse prod env.\n\n## Type\nFix\n\n## Validation\nDeployed.\n\n## Risks\nSecrets rotated.\n\nCloses #9\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 3,
+    "deletions": 3,
+    "changedFiles": [".env"],
+    "fileContents": {},
+    "labels": []
+  },
+  "policyOverride": {
+    "visualPaths": ["assets/**"]
+  }
+}

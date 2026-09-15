@@ -1,0 +1,15 @@
+{
+  "context": {
+    "title": "docs(readme): fix typo in install guide",
+    "body": "## Summary\nTypo fix.\n\n## Type\nDocs\n\n## Validation\nRead the rendered page.\n\n## Risks\nNone.\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 2,
+    "deletions": 1,
+    "changedFiles": ["docs/install.md"],
+    "fileContents": {},
+    "labels": []
+  }
+}
