@@ -125,4 +125,16 @@ void describe("HorneroOS PR-governance engine", () => {
     assert.deepEqual(policy, defaultPolicy());
     fs.rmSync(dir, { recursive: true, force: true });
   });
+
+  void it("dangerfile build: no tsc helpers (cleanDangerfile would strip them)", () => {
+    // Danger loads dist/src/dangerfile.js via cleanDangerfile +
+    // require-from-string; cleanDangerfile comments out everything from
+    // the first `var` to require("danger"), so tsc-emitted __importStar
+    // et al must never appear in this file (see src/dangerfile.ts NOTE).
+    const compiled = fs.readFileSync(
+      path.join(here, "..", "src", "dangerfile.js"),
+      "utf8",
+    );
+    assert.ok(!/^var __\w+ =/m.test(compiled), "tsc helpers in dangerfile");
+  });
 });
