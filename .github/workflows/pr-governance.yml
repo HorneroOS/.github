@@ -64,11 +64,11 @@ jobs:
         working-directory: .governance-engine/governance/danger
         run: npm ci
 
-      - name: Typecheck engine
+      - name: Build engine
         working-directory: .governance-engine/governance/danger
-        run: npx tsc --noEmit
+        run: npm run build
 
       - name: Run Danger
         env:
           GITHUB_TOKEN: ${{ inputs.github-token != '' && inputs.github-token || secrets.GITHUB_TOKEN }}
-        run: .governance-engine/governance/danger/node_modules/.bin/danger ci --dangerfile .governance-engine/governance/danger/src/dangerfile.ts
+        run: .governance-engine/governance/danger/node_modules/.bin/danger ci --dangerfile .governance-engine/governance/danger/dist/src/dangerfile.js
