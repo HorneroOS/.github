@@ -1,9 +1,17 @@
 # Support
 
+## Product information
+
+Browse the [official HorneroOS site](https://horneroos.com/) for the product
+overview, visual showcase and current documentation. Check the
+[release catalogue](https://github.com/HorneroOS/hornero/releases) for the
+status and maturity of published builds.
+
 ## Documentation
 
-Start with the official documentation in
-[HorneroOS/docs](https://github.com/HorneroOS/docs).
+Start with the [official documentation](https://horneroos.com/docs/). The
+[docs repository](https://github.com/HorneroOS/docs) contains its source and
+contributor guidance.
 
 ## Questions and discussion
 
@@ -13,7 +21,10 @@ Start with the official documentation in
   repository ([shell](https://github.com/HorneroOS/shell),
   [config](https://github.com/HorneroOS/config),
   [installer](https://github.com/HorneroOS/installer),
-  [website](https://github.com/HorneroOS/website)).
+  [docs](https://github.com/HorneroOS/docs),
+  [greeter](https://github.com/HorneroOS/greeter),
+  [website](https://github.com/HorneroOS/website),
+  [QA](https://github.com/HorneroOS/qa)).
 
 ## Bug reports
 
