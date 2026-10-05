@@ -1,28 +1,26 @@
-# Security Policy
+# Security policy
 
-Hornero OS is in its early stages and does not yet have a dedicated security
-response process. This policy will evolve as the project matures.
+HorneroOS is pre-release software. Security fixes and response procedures are
+coordinated by the maintainers; the project does not publish a guaranteed
+response-time commitment.
 
-## Reporting a vulnerability
+## Report a vulnerability privately
 
-If you find a security issue in any HorneroOS repository:
+Please do not post exploit details in a public issue or pull request.
 
-1. **Do not open a public issue** with the details.
-2. Use GitHub's **private vulnerability reporting** on the affected repository
-   (Security tab → Report a vulnerability), if enabled.
-3. If that is not available, contact the organization owners through the
+1. On the affected repository, use **Security → Report a vulnerability** if
+   private vulnerability reporting is available.
+2. If that option is unavailable, contact the organization owners through the
    [HorneroOS people page](https://github.com/orgs/HorneroOS/people) and ask
-   for a private channel.
+   for a private reporting channel. Do not include sensitive details in the
+   initial public message.
 
-Include a description of the issue, steps to reproduce it and the versions or
-commits affected.
+Include the affected repository and version or commit, the impact, and
+reproduction steps that the maintainer can verify safely. Share a proof of
+concept only through the private channel.
 
 ## Scope
 
-In scope: code and configuration published under the HorneroOS organization.
-Out of scope: third-party projects, personal dotfiles repositories and
-downstream systems.
-
-## License
-
-[MIT](LICENSE).
+This policy covers code and configuration published under the
+[HorneroOS organization](https://github.com/HorneroOS). Third-party projects
+and downstream systems are outside the maintainers' direct control.

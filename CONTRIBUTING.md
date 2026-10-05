@@ -1,40 +1,58 @@
-# Contributing to Hornero OS
+# Contributing to HorneroOS
 
-Thanks for your interest in Hornero OS. This guide applies to every repository
-in the [HorneroOS](https://github.com/HorneroOS) organization unless a
-repository defines its own rules.
+Thanks for helping build HorneroOS. Contributions are welcome across the
+desktop, configuration, documentation, installer and system-composition work.
+HorneroOS is pre-release software; check the current product catalogue and
+release notes before describing a capability as supported.
 
-Hornero OS is an Arch Linux-based desktop operating system built around
-Wayland, Hyprland and Quickshell. The project is in its early stages, so
-expect rough edges and evolving conventions.
+## Find the right place
 
-## How to contribute
+Start with the [official website](https://horneroos.com/) and
+[documentation](https://horneroos.com/docs/), then open the repository that
+owns the change:
 
-1. **Find the right repository.** Each repository has a narrow responsibility
-   (composition, shell, config, installer, docs, website). Open issues and pull
-   requests in the repository that owns the concern.
-2. **Check existing issues first** to avoid duplicates.
-3. **Keep changes focused.** One pull request per concern; small, reviewable
-   diffs are preferred.
-4. **Write in English.** Code, commits, issues, pull requests and documentation
-   are all in English so the project stays internationally accessible.
+| Work | Repository |
+| --- | --- |
+| Editions, package composition, release definitions | [hornero](https://github.com/HorneroOS/hornero) |
+| Desktop shell, settings, bars and interactions | [shell](https://github.com/HorneroOS/shell) |
+| Declarative configuration, themes and wallpapers | [config](https://github.com/HorneroOS/config) |
+| Login screen | [greeter](https://github.com/HorneroOS/greeter) |
+| Installation workflow | [installer](https://github.com/HorneroOS/installer) |
+| User and contributor documentation | [docs](https://github.com/HorneroOS/docs) |
+| Official website and showcase | [website](https://github.com/HorneroOS/website) |
+| System and graphical acceptance | [qa](https://github.com/HorneroOS/qa) |
 
-## Pull requests
+Before opening work, search the owning repository's issues and pull requests
+for an existing discussion. For a cross-repository change, identify the source
+of truth and describe any required coordination in the PR.
 
-- Branch from `main` and target `main`.
-- Describe what the change does and why it is needed.
-- Update documentation when behavior changes.
-- Do not commit secrets, credentials or personal data.
-- All contributions are provided under the repository's open-source license
-  (MIT unless stated otherwise).
+## Make a reviewable contribution
 
-## Reporting issues
+1. Branch from the repository's current `main` and target `main`.
+2. Keep each PR focused on one user-visible outcome or closely related set of
+   changes.
+3. Explain the problem, resulting behavior and any meaningful limitation.
+4. Run the checks documented by that repository and include the commands and
+   results in the PR description.
+5. Update user documentation and product data when behavior, maturity,
+   installation or compatibility changes.
+6. Use screenshots or reproducible QA evidence for visual and interaction
+   changes where practical.
 
-- Use the issue tracker of the repository the problem belongs to.
-- Include what you did, what you expected and what happened instead, plus
-  relevant version and environment details.
+Use English for source comments, commits, issues, pull requests and maintained
+documentation so contributors can collaborate across language communities.
+User-facing product copy may follow the language conventions of its surface.
 
-## Code of conduct
+Do not commit secrets, personal data, machine-specific paths or private user
+configuration. Do not claim support from a package list or static check alone;
+the product owner and available acceptance evidence determine maturity.
 
-Participation in HorneroOS spaces is governed by our
-[Code of Conduct](CODE_OF_CONDUCT.md).
+## Pull requests and conduct
+
+Use the repository's pull-request template. Review feedback should address
+behavior, evidence, maintainability, accessibility and security. Participation
+follows the organization [Code of Conduct](CODE_OF_CONDUCT.md).
+
+For installation and release work, clearly distinguish development builds,
+provisional media, previews and supported releases. Never encourage using
+unvalidated media on a machine containing important data.
