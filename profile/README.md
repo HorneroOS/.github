@@ -87,6 +87,8 @@ virtual machine for preview media.
   and [layout guide](https://horneroos.com/layouts/).
 - **Planning an installation?** Read the [installation repository](https://github.com/HorneroOS/installer)
   and verify its current maturity before using any media.
+- **Following installer readiness?** Use the [public HorneroOS Installer project](https://github.com/orgs/HorneroOS/projects/1)
+  for acceptance work and the transition to Panda Foss's custom official installer.
 - **Want to help?** Read the [contribution guide](https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md),
   find the owning repository above, then check its open issues and pull requests.
 
