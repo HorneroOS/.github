@@ -67,6 +67,9 @@ virtual machine for preview media.
 
 ## Find your way around
 
+For contribution routing and cross-repository source-of-truth boundaries,
+see the [repository map](../governance/docs/repository-map.md).
+
 | Repository | What it owns |
 | --- | --- |
 | [hornero](https://github.com/HorneroOS/hornero) | Edition catalogue, package composition, release pins and system integration. |
