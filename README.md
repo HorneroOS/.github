@@ -16,20 +16,6 @@ and release notes, not in this repository.
 - [Releases and maturity](https://github.com/HorneroOS/hornero/releases)
 - [Organization profile](profile/README.md)
 
-## Find the owner of a change
-
-HorneroOS is split across repositories with separate sources of truth. The
-[repository map](governance/docs/repository-map.md) explains what each repo
-owns, how product data flows between them, and how to use the public
-[Installer Project](https://github.com/orgs/HorneroOS/projects/1). Share that
-map when onboarding a contributor or coordinating cross-repository work.
-
-The Installer Project tracks installation outcomes across those repositories.
-[Panda Foss](https://github.com/PandaFoss) owns design and implementation of
-the custom official installer. The Calamares path in `HorneroOS/installer`
-remains provisional. The Project tracks readiness and acceptance without
-prescribing Panda's implementation.
-
 ## Community files
 
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — choose the right repository and make

@@ -8,14 +8,8 @@ release notes before describing a capability as supported.
 ## Find the right place
 
 Start with the [official website](https://horneroos.com/) and
-[documentation](https://horneroos.com/docs/). Use the
-[repository map](governance/docs/repository-map.md) to identify the owner,
-source of truth, and cross-repository dependencies before opening work. The
-[public Installer Project](https://github.com/orgs/HorneroOS/projects/1) is the
-single planning surface for install readiness; it does not replace issues in
-their owning repositories.
-
-The short routing table is:
+[documentation](https://horneroos.com/docs/), then open the repository that
+owns the change:
 
 | Work | Repository |
 | --- | --- |
@@ -27,7 +21,6 @@ The short routing table is:
 | User and contributor documentation | [docs](https://github.com/HorneroOS/docs) |
 | Official website and showcase | [website](https://github.com/HorneroOS/website) |
 | System and graphical acceptance | [qa](https://github.com/HorneroOS/qa) |
-| Organization-wide contribution defaults and governance | [.github](https://github.com/HorneroOS/.github) |
 
 Before opening work, search the owning repository's issues and pull requests
 for an existing discussion. For a cross-repository change, identify the source
