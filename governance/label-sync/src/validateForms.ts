@@ -54,6 +54,18 @@ function collectFormLabels(formPath: string): string[] {
   return found;
 }
 
+function validateFormType(formPath: string, expected: string): string | undefined {
+  const raw: unknown = yaml.load(fs.readFileSync(formPath, "utf8"));
+  if (!isRecord(raw)) {
+    return `${formPath}: root must be a mapping`;
+  }
+  const type = raw["type"];
+  if (type !== expected) {
+    return `${formPath}: native issue type must be ${JSON.stringify(expected)}, got ${JSON.stringify(type)}`;
+  }
+  return undefined;
+}
+
 function main(): void {
   const root = path.resolve(__dirname, "..", "..", "..");
   const labelsFile = path.join(root, "governance", "labels.yml");
@@ -62,23 +74,33 @@ function main(): void {
   const taxonomy = parseLabelsFile(yaml.load(fs.readFileSync(labelsFile, "utf8")));
   const known = labelNames(taxonomy);
 
-  const forms = ["bug-report.yml", "feature-request.yml", "documentation.yml"];
+  const forms = [
+    { name: "bug-report.yml", type: "Bug" },
+    { name: "feature-request.yml", type: "Feature" },
+    { name: "documentation.yml", type: "Task" },
+    { name: "task-maintenance.yml", type: "Task" },
+  ];
   let failures = 0;
-  for (const form of forms) {
-    const formPath = path.join(templateDir, form);
+  for (const { name, type } of forms) {
+    const formPath = path.join(templateDir, name);
+    const typeError = validateFormType(formPath, type);
+    if (typeError !== undefined) {
+      console.error(`FAIL ${typeError}`);
+      failures += 1;
+    }
     const refs = collectFormLabels(formPath);
     if (refs.length === 0) {
-      console.error(`FAIL ${form}: references no labels`);
+      console.error(`FAIL ${name}: references no labels`);
       failures += 1;
       continue;
     }
     for (const ref of refs) {
       if (!known.has(ref)) {
-        console.error(`FAIL ${form}: label ${JSON.stringify(ref)} not in governance/labels.yml`);
+        console.error(`FAIL ${name}: label ${JSON.stringify(ref)} not in governance/labels.yml`);
         failures += 1;
       }
     }
-    console.log(`ok ${form}: ${refs.length} label reference(s) all in taxonomy`);
+    console.log(`ok ${name}: type ${type}; ${refs.length} label reference(s) all in taxonomy`);
   }
   if (failures > 0) {
     throw new Error(`label validation failed with ${failures} problem(s)`);

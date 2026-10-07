@@ -6,8 +6,9 @@ automatically unless it defines its own file of the same kind.
 
 ## What is provided
 
-- **Issue forms** (`.github/ISSUE_TEMPLATE/`): exactly three structured
-  forms — `bug-report.yml`, `feature-request.yml`, `documentation.yml` —
+- **Issue forms** (`.github/ISSUE_TEMPLATE/`): four structured
+  forms — `bug-report.yml`, `feature-request.yml`, `documentation.yml`, and
+  `task-maintenance.yml` —
   plus `config.yml` with `blank_issues_enabled: false` and contact links to
   Discussions, documentation, the contributing guide, and the security
   policy.
@@ -18,6 +19,9 @@ automatically unless it defines its own file of the same kind.
   characters, no secrets, focused PR, docs updated, validation green).
 - **Label taxonomy** (`governance/labels.yml`): the canonical `type:*`,
   `area:*`, `status:*`, and `priority:*` labels. Small on purpose.
+- **Native issue types**: the forms assign organization-level `Bug`,
+  `Feature`, or `Task` types. Docs and maintenance work use `Task`; labels
+  remain useful for cross-repository automation and filtering.
 - **Additive label sync** (`governance/label-sync/` + the `label-sync`
   workflow): creates missing canonical labels and refreshes
   descriptions/colors; never deletes repository-specific labels.
@@ -57,8 +61,10 @@ jobs:
 ```
 
 Propagation is pull-based: taxonomy edits converge everywhere within a
-week, or immediately via manual dispatch. The installer repository is
-excluded (read-only handoff, no caller).
+week, or immediately via manual dispatch. Every maintained repository,
+including the provisional installer, uses the same thin caller. The
+installer is not excluded from shared governance; its maintainers retain
+ownership of installer behavior and release decisions.
 
 ## Conventions
 
@@ -66,8 +72,8 @@ excluded (read-only handoff, no caller).
 - Conventional commits / PR titles (`type: subject`, at most 100
   characters).
 - Focused PRs: one concern per PR, small reviewable diffs.
-- Merge only green, where ownership permits. (The installer repository is
-  read-only for governance rollout: handoff documentation only, no writes.)
+- Merge only green, where ownership permits. Shared issue forms and additive
+  label sync apply to the installer repository just as they do elsewhere.
 
 ## What this half does NOT do
 

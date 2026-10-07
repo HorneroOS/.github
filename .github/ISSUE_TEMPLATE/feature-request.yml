@@ -4,6 +4,7 @@ title: "feat: "
 labels:
   - type:feature
   - status:needs-triage
+type: Feature
 body:
   - type: markdown
     attributes:
@@ -48,7 +49,7 @@ body:
     id: area
     attributes:
       label: Area (optional)
-      description: Which area does this belong to, if you know?
+      description: This choice is included in your report for routing; it does not apply a GitHub label.
       options:
         - Not sure
         - area:governance

@@ -1,0 +1,89 @@
+name: Task / maintenance
+description: Track engineering work, QA, packaging, or repository maintenance.
+title: "task: "
+labels:
+  - type:maintenance
+  - status:needs-triage
+type: Task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for work that is not a user-facing feature or bug report,
+        such as refactors, release engineering, packaging, QA, migrations, and
+        repository maintenance. Do not include secrets or personal data.
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What existing behavior, constraint, or gap makes this work necessary?
+      placeholder: The installer repository does not receive the canonical organization labels.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: What should be true when this work is complete?
+      placeholder: New installer issues receive the shared triage labels and native issue types.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Note the expected boundaries or affected repositories when known.
+      placeholder: Keep the change in HorneroOS/.github and the installer label-sync caller.
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable checks that demonstrate the outcome.
+      placeholder: |
+        - The workflow creates missing canonical labels without deleting repository labels.
+        - Existing shared issue forms work in the installer repository.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies or blockers (optional)
+      description: Link related issues or describe an external dependency.
+      placeholder: Depends on a shared label-sync workflow revision.
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Additional evidence (optional)
+      description: Add logs, links, or other context that helps review the task.
+    validations:
+      required: false
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area (optional)
+      description: This choice is included in your report for routing; it does not apply a GitHub label.
+      options:
+        - Not sure
+        - area:governance
+        - area:docs
+        - area:ci
+        - area:security
+        - area:infra
+      default: 0
+    validations:
+      required: false
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for duplicate work.
+          required: true
+        - label: I opened this in the repository that owns the work.
+          required: true
+        - label: I removed secrets, credentials, and personal data.
+          required: true

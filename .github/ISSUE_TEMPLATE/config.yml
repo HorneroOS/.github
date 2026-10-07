@@ -1,6 +1,6 @@
 # Org-default issue configuration.
 #
-# Blank issues are disabled so every report uses one of the three
+# Blank issues are disabled so every report uses one of the four
 # structured forms above. See governance/docs/inheritance-trap.md:
 # repositories MUST NOT add their own local ISSUE_TEMPLATE directory to
 # "extend" these forms — any local directory replaces ALL org defaults.

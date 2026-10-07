@@ -9,7 +9,7 @@ forms are replaced — the repository gets only its local files.
 
 - Do NOT create a local `ISSUE_TEMPLATE` directory to "add one more form"
   or "tweak one field". Doing so silently drops the org-default bug,
-  feature, and docs forms for that repository.
+  feature, docs, and task/maintenance forms for that repository.
 - The same applies to `config.yml`: a local one replaces the org-default
   contact links and the `blank_issues_enabled: false` setting.
 - There are no local `ISSUE_TEMPLATE` directories anywhere in HorneroOS
