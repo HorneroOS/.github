@@ -13,7 +13,7 @@ for f in glob.glob('.github/ISSUE_TEMPLATE/*.yml') + ['governance/labels.yml', '
 "
 ```
 
-## Form labels ⊆ taxonomy
+## Form labels and native issue types
 
 ```sh
 cd governance/label-sync
@@ -22,8 +22,11 @@ npm run validate
 ```
 
 This rebuilds the TypeScript validator (`tsc`, strict) and checks that
-every label referenced by the three issue forms exists in
-`governance/labels.yml`.
+every label referenced by the four issue forms exists in
+`governance/labels.yml`. It also locks the intended organization issue type
+for each form: `Bug` for bug reports, `Feature` for feature requests, and
+`Task` for documentation and maintenance work. The type names must match the
+native issue types configured for the HorneroOS organization.
 
 ## TypeScript tooling
 

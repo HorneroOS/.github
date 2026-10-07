@@ -5,8 +5,9 @@ Organization defaults for HorneroOS repositories, owned by the
 
 ## Layout
 
-- [`.github/ISSUE_TEMPLATE/`](../.github/ISSUE_TEMPLATE/) — the only three
-  org-default issue forms (bug, feature, docs) plus `config.yml`.
+- [`.github/ISSUE_TEMPLATE/`](../.github/ISSUE_TEMPLATE/) — the four
+  org-default issue forms (bug, feature, docs, task/maintenance) plus
+  `config.yml`.
 - [`.github/PULL_REQUEST_TEMPLATE.md`](../.github/PULL_REQUEST_TEMPLATE.md) —
   the default PR template.
 - [`labels.yml`](labels.yml) — the canonical label taxonomy. Issue forms
@@ -17,7 +18,7 @@ Organization defaults for HorneroOS repositories, owned by the
 
 ## Rules
 
-1. Only three issue forms exist: bug, feature, docs. No skill, agent, or
+1. Only four issue forms exist: bug, feature, docs, task/maintenance. No skill, agent, or
    loop domain forms.
 2. Forms reference only canonical labels from `labels.yml`.
 3. Label sync is additive — it never deletes repository-specific labels.
