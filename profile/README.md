@@ -2,6 +2,16 @@
 
 **An Arch-based operating system family, with a Wayland-first desktop and a visual identity of its own.**
 
+HorneroOS grows from more than eight years of Linux work: the real setup of
+[Ulises Jeremias](https://github.com/ulises-jeremias), continuously used,
+tested and refined on personal systems before the current AI OS wave. HorneroOS
+turns that experience into a reproducible product. Ulises is the project's
+principal maintainer. [Panda Foss](https://github.com/PandaFoss) contributes to
+HorneroOS and is one of the maintainers of
+[Anarchy Linux](https://gitlab.com/anarchyinstaller/installer); both are part of
+the [HorneroOS organization](https://github.com/HorneroOS). Read more about the
+project's [roots and design history](https://horneroos.com/roots/).
+
 <p align="center">
   <a href="https://horneroos.com/showroom/">
     <img src="https://raw.githubusercontent.com/HorneroOS/website/main/assets/screenshots/certified/hornero-left.png" alt="HorneroOS Desktop with the Hornero Left layout and a landscape wallpaper" width="960">
