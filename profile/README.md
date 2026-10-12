@@ -80,6 +80,13 @@ virtual machine for preview media.
 For contribution routing and cross-repository source-of-truth boundaries,
 see the [repository map](../governance/docs/repository-map.md).
 
+For product and interface work, start with the shared
+[design language](https://horneroos.com/docs/development/design-language/),
+then check the current [edition catalogue](https://horneroos.com/editions/)
+and [compositor capability guide](https://horneroos.com/docs/desktop/compositors/).
+These documents explain the shared visual principles and current support
+boundaries; the repository map identifies where each implementation belongs.
+
 | Repository | What it owns |
 | --- | --- |
 | [hornero](https://github.com/HorneroOS/hornero) | Edition catalogue, package composition, release pins and system integration. |
