@@ -45,9 +45,17 @@ this map and implementation appear to differ. For current maturity, read the
 catalogue and release state in `hornero`; for current installation readiness,
 read the Installer Project and provisional installer documentation.
 
+## Organization projects
+
+The canonical map of the five public projects (Installer,
+Roadmap, Shell & Desktop, Platform & Release, Docs/Web &
+Governance), their fields, views, and the rule that every issue
+belongs to at least the umbrella Roadmap project, lives in
+[projects.md](projects.md).
+
 ## Installer ownership and the public Project
 
-The single public cross-repository planning surface is the
+The public cross-repository planning surface for installation is the
 [HorneroOS Installer Project](https://github.com/orgs/HorneroOS/projects/1).
 It tracks outcomes required for a trustworthy HorneroOS installation and the
 transition from the provisional installer to the official path. It is not a
