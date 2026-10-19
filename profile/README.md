@@ -109,6 +109,10 @@ boundaries; the repository map identifies where each implementation belongs.
   and verify its current maturity before using any media.
 - **Following installer readiness?** Use the [public HorneroOS Installer project](https://github.com/orgs/HorneroOS/projects/1)
   for acceptance work and the transition to Panda Foss's custom official installer.
+- **Looking for the roadmap?** Every issue lives in the [HorneroOS Roadmap](https://github.com/orgs/HorneroOS/projects/2);
+  specialized boards: [Shell & Desktop](https://github.com/orgs/HorneroOS/projects/3),
+  [Platform & Release](https://github.com/orgs/HorneroOS/projects/4),
+  [Docs, Web & Governance](https://github.com/orgs/HorneroOS/projects/5).
 - **Want to help?** Read the [contribution guide](https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md),
   find the owning repository above, then check its open issues and pull requests.
 
