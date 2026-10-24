@@ -57,6 +57,17 @@ for more views and wallpaper variety.
   </tr>
 </table>
 
+## The maintainer's workspace
+
+This personal workstation capture was shared by HorneroOS's principal
+maintainer in October 2026. It shows one way to arrange the desktop alongside
+development tools; it is illustrative, not a QA capture, a supported default,
+or release-readiness evidence.
+
+<p align="center">
+  <img src="assets/maintainer-workstation-2026-10.png" alt="The HorneroOS maintainer's personal Wayland workstation, with a terminal system monitor, workspace list and quick controls open" width="1200">
+</p>
+
 ## Where the project stands
 
 HorneroOS is pre-release software. The product catalogue and release notes are
