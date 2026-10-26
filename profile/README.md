@@ -125,7 +125,7 @@ boundaries; the repository map identifies where each implementation belongs.
   specialized boards: [Shell & Desktop](https://github.com/orgs/HorneroOS/projects/3),
   [Platform & Release](https://github.com/orgs/HorneroOS/projects/4),
   [Docs, Web & Governance](https://github.com/orgs/HorneroOS/projects/5).
-- **Found a bug or an install problem?** Pick a structured form at [new issue](https://github.com/HorneroOS/hornero/issues/new/choose); include the ISO name, your firmware type and the step where it failed.
+- **Found a bug?** Pick a structured form at [new issue](https://github.com/HorneroOS/hornero/issues/new/choose). **An install problem?** Report it in the installer repo at [new install issue](https://github.com/HorneroOS/installer/issues/new/choose); include the ISO name, your firmware type and the step where it failed.
 - **Want to help?** Read the [contribution guide](https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md),
   find the owning repository above, then check its open issues and pull requests.
 
