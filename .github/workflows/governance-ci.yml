@@ -13,12 +13,11 @@
 name: governance-ci
 
 on:
+  # No paths filter on push: every commit landing on main must produce a
+  # CI run for that exact SHA (profile/docs-only merges such as #24 were
+  # previously invisible to CI). Pull requests stay unfiltered too.
   push:
     branches: [main]
-    paths:
-      - governance/**
-      - .github/**
-      - scripts/**
   pull_request:
 
 permissions:
