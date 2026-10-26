@@ -78,8 +78,9 @@ edition is supported.
 | --- | --- |
 | **HorneroOS Desktop** | Preview; Hyprland is the supported default compositor. |
 | **Niri desktop session** | Experimental; capability and workflow coverage is still evolving. |
-| **Server, Agents and Studio** | Planned; not offered as installable editions yet. |
-| **Installation media** | Consult the installer repository for the current provisional state; no stable installer release is implied here. |
+| **HorneroOS Studio** | Preview; installable from the Preview ISO. Hardware validation is still pending. |
+| **Server and Agents** | Planned; not offered as installable editions yet. |
+| **Installation media** | Preview ISO `v0.2.0-preview22` with SHA-256 and GPG signature, tested in virtual machines (UEFI and BIOS). Physical hardware reports are welcome. |
 
 See the [current release notes](https://github.com/HorneroOS/hornero/releases)
 and the [installation documentation](https://github.com/HorneroOS/installer)
@@ -124,6 +125,7 @@ boundaries; the repository map identifies where each implementation belongs.
   specialized boards: [Shell & Desktop](https://github.com/orgs/HorneroOS/projects/3),
   [Platform & Release](https://github.com/orgs/HorneroOS/projects/4),
   [Docs, Web & Governance](https://github.com/orgs/HorneroOS/projects/5).
+- **Found a bug or an install problem?** Pick a structured form at [new issue](https://github.com/HorneroOS/hornero/issues/new/choose); include the ISO name, your firmware type and the step where it failed.
 - **Want to help?** Read the [contribution guide](https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md),
   find the owning repository above, then check its open issues and pull requests.
 
