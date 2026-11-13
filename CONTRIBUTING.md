@@ -26,6 +26,7 @@ The short routing table is:
 | Installation workflow | [installer](https://github.com/HorneroOS/installer) |
 | User and contributor documentation | [docs](https://github.com/HorneroOS/docs) |
 | Official website and showcase | [website](https://github.com/HorneroOS/website) |
+| Plugins and extension packages | [plugins](https://github.com/HorneroOS/plugins) |
 | System and graphical acceptance | [qa](https://github.com/HorneroOS/qa) |
 | Organization-wide contribution defaults and governance | [.github](https://github.com/HorneroOS/.github) |
 
@@ -45,6 +46,14 @@ of truth and describe any required coordination in the PR.
    installation or compatibility changes.
 6. Use screenshots or reproducible QA evidence for visual and interaction
    changes where practical.
+
+For extension work, open the issue with the shared Extension form in the
+owning repository and fill in every pull-request template section (linked
+owning issue, duplicate-scope check, declared capabilities, tooltip and
+accessibility evidence, translation impact, security notes, performance
+impact, and exact ran-vs-pending QA status). Extension QA follows the
+HorneroOS/qa Premium Acceptance Matrix; never record a scenario that did
+not run as passed.
 
 Use English for source comments, commits, issues, pull requests and maintained
 documentation so contributors can collaborate across language communities.

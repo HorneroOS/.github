@@ -38,6 +38,9 @@ labels:
   - name: area:infra
     description: Infrastructure, packaging, release plumbing.
     color: "0e8a16"
+  - name: area:extensions
+    description: Extension work (shell/plugins extension surfaces and APIs).
+    color: "7057ff"
   # Triage state. New org-default issues start at needs-triage.
   - name: status:needs-triage
     description: Awaiting maintainer triage.

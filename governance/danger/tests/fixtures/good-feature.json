@@ -1,7 +1,7 @@
 {
   "context": {
     "title": "feat(shell): add volume slider to quick settings",
-    "body": "## Summary\nAdds a volume slider to quick settings.\n\n## Type\nfeat\n\n## Validation\nRan `npm test` in shell repo; manual VM check.\n\n## Risks\nLow; UI-only change.\n\nCloses #42\n",
+    "body": "## Summary\nAdds a volume slider to quick settings.\n\n## Type\nfeat\n\n## Linked owning issue\nCloses #42\n\n## Duplicate-scope check\nSearched shell issues and PRs for \"volume slider\"; #41 covers output switching, not the slider. No duplicate scope.\n\n## Declared capabilities\nNone — uses the existing audio service already declared by the shell.\n\n## Validation\nRan `npm test` in shell repo; manual VM check.\n\n## QA status\nRan: `npm test` (passed); manual VM check of the slider.\nPending: HiDPI and multi-monitor scenarios from the qa Premium Acceptance Matrix.\n\n## Tooltip & accessibility\nSlider has an accessible name and keyboard control; tooltip \"Volume\" verified with keyboard-only use.\n\n## Translation impact\nOne new tooltip string, added through the existing translation catalog.\n\n## Security notes\nNone — no new privileges, network, or file access.\n\n## Performance impact\nN/A — renders on demand with the existing quick-settings panel; no polling or always-on cost.\n\n## Risks\nLow; UI-only change.\n",
     "author": "ulises-jeremias",
     "isBot": false,
     "isDraft": false,

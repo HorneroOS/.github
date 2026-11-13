@@ -1,0 +1,193 @@
+name: Extension
+description: Propose or track extension work (Extensions 2.0 acceptance fields).
+title: "feat: "
+labels:
+  - type:feature
+  - status:needs-triage
+type: Feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for extension work in the repository that owns the
+        extension (for example HorneroOS/shell or HorneroOS/plugins).
+        Every field below is required; where a field genuinely does not
+        apply, write `N/A — <reason>` instead of leaving it blank.
+        Extension QA follows the HorneroOS/qa Premium Acceptance Matrix
+        (HorneroOS/qa#81): record what actually ran and keep scenarios
+        that did not run as pending. Do not post secrets, credentials,
+        or personal data.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What extension capability is proposed or changed, in one or two sentences?
+      placeholder: Add a clipboard-history extension to the top bar.
+    validations:
+      required: true
+  - type: textarea
+    id: owning-issue
+    attributes:
+      label: Linked owning issue
+      description: >-
+        Name the repository that owns this work and link the owning issue
+        (parent, program, or tracking issue). If this issue is itself the
+        owning issue, say so and name the owning repository.
+      placeholder: |
+        Owning repository: HorneroOS/plugins
+        Owning issue: https://github.com/HorneroOS/plugins/issues/00
+    validations:
+      required: true
+  - type: textarea
+    id: duplicate-scope-check
+    attributes:
+      label: Duplicate-scope check
+      description: >-
+        List the repositories, issues, pull requests, and existing
+        extensions you searched, the closest matches you found, and why
+        this work is not a duplicate (or how its scope differs).
+      placeholder: |
+        Searched: HorneroOS/plugins and HorneroOS/shell issues/PRs for "clipboard".
+        Closest match: HorneroOS/plugins#00 covers clipboard sync, not history UI.
+        Difference: this issue covers history storage and its panel only.
+    validations:
+      required: true
+  - type: textarea
+    id: declared-capabilities
+    attributes:
+      label: Declared capabilities
+      description: >-
+        List every capability or permission the extension declares or
+        would need (for example network, filesystem, settings, session
+        services), including manifest changes. Write `None` only when
+        the extension declares no capabilities.
+      placeholder: |
+        - Read and write the primary clipboard selection.
+        - No network access, no filesystem access outside its own settings.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots (UI changes)
+      description: >-
+        For UI changes, attach or link screenshots or mockups of every
+        affected surface, including placement near screen and bar edges.
+        Write `N/A — <reason>` only when the change has no UI.
+      placeholder: Attach screenshots here, or write N/A — no UI surface changes.
+    validations:
+      required: true
+  - type: textarea
+    id: tooltip-accessibility
+    attributes:
+      label: Tooltip and accessibility evidence
+      description: >-
+        Describe tooltip text and placement, accessible names,
+        keyboard-only operation, focus behavior, and reduced-motion
+        handling, with the evidence attached or planned. Write
+        `N/A — <reason>` only when there is no interactive UI.
+      placeholder: |
+        - Tooltip: "Clipboard history" on the bar button, placed away from the bar edge.
+        - Keyboard: panel opens, navigates, and closes with the keyboard only.
+        - Evidence: keyboard-only walkthrough recorded; reduced-motion check pending.
+    validations:
+      required: true
+  - type: textarea
+    id: translation-impact
+    attributes:
+      label: Translation impact
+      description: >-
+        List new or changed user-visible strings and how they are
+        exposed for translation. Write `N/A — <reason>` when no
+        user-visible strings change.
+      placeholder: |
+        New strings: panel title, empty-state text, and one tooltip.
+        All strings go through the existing translation catalog; no hard-coded copy.
+    validations:
+      required: true
+  - type: textarea
+    id: security-notes
+    attributes:
+      label: Security notes
+      description: >-
+        Note privileges, network or file access, data retention, and
+        any secret handling this work introduces or touches. Write
+        `None — <reason>` when there is no security-relevant surface.
+        Report vulnerabilities via SECURITY.md, not in this issue.
+      placeholder: |
+        Clipboard contents stay in memory only; nothing is written to disk
+        or sent over the network. No elevated privileges.
+    validations:
+      required: true
+  - type: textarea
+    id: performance-impact
+    attributes:
+      label: Performance impact
+      description: >-
+        State the expected startup, CPU, and memory cost, including
+        always-on cost while the extension is enabled. Write
+        `N/A — <reason>` only when nothing runs at runtime.
+      placeholder: |
+        Lazy-loaded on first open; no polling. History capped at 50 entries
+        in memory. No cost while disabled.
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Tests
+      description: >-
+        List the automated and manual tests that cover this work
+        (existing or planned), with the exact commands where known.
+      placeholder: |
+        - Unit: history cap and deduplication (`npm test` in the owning repo).
+        - Runtime: enable, disable, and restart persistence in a VM session.
+    validations:
+      required: true
+  - type: textarea
+    id: qa-status
+    attributes:
+      label: QA status (ran vs. pending)
+      description: >-
+        Give the exact QA status against the HorneroOS/qa Premium
+        Acceptance Matrix (HorneroOS/qa#81). List what ran, with
+        commands or scenario names and results, separately from what
+        is still pending. Never record a scenario that did not run
+        as passed.
+      placeholder: |
+        Ran: source tests in the owning repo — passed.
+        Pending: all four bar edges, HiDPI, keyboard-only, reduced motion,
+        offline behavior, restart persistence (HorneroOS/qa#81 matrix).
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area (optional)
+      description: This choice is included in your report for routing; it does not apply a GitHub label.
+      options:
+        - area:extensions
+        - Not sure
+        - area:governance
+        - area:docs
+        - area:ci
+        - area:security
+        - area:infra
+      default: 0
+    validations:
+      required: false
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues, pull requests, and extensions for duplicate scope.
+          required: true
+        - label: I opened this in the repository that owns the extension work.
+          required: true
+        - label: I declared every capability this extension needs, or explicitly wrote None.
+          required: true
+        - label: My QA status lists only checks that actually ran as ran; everything else is pending.
+          required: true
+        - label: I removed secrets, credentials, and personal data.
+          required: true

@@ -31,6 +31,30 @@ void describe("HorneroOS PR-governance engine", () => {
     assert.ok(rules(findings, "message").includes("docs-links"));
     // Fixture uses the template's conventional-commit vocabulary ("feat").
     assert.ok(!rules(findings, "warn").includes("body-type"));
+    // Fixture fills every shared-template section, Extensions 2.0 included.
+    assert.ok(!rules(findings, "warn").includes("body-sections"));
+  });
+
+  void it("extension-missing-sections: warns naming each missing acceptance section", () => {
+    const { findings } = load("extension-missing-sections");
+    assert.deepEqual(rules(findings, "fail"), []);
+    const sectionWarn = findings.find((f) => f.rule === "body-sections");
+    assert.ok(sectionWarn !== undefined, "expected a body-sections warning");
+    for (const key of [
+      "linked",
+      "duplicate",
+      "declared",
+      "qa",
+      "tooltip",
+      "translation",
+      "security",
+      "performance",
+    ]) {
+      assert.ok(
+        sectionWarn.detail.includes(key),
+        `warning should name missing section "${key}": ${sectionWarn.detail}`,
+      );
+    }
   });
 
   void it("gov-pin: engine release-pin style passes pin check", () => {
