@@ -10,7 +10,9 @@ body:
     attributes:
       value: |
         Thanks for proposing an improvement. Small, focused requests are
-        easier to review. Do not post secrets, credentials, or personal data.
+        easier to review. For extension work, use the Extension form
+        instead; it collects the Extensions 2.0 acceptance fields.
+        Do not post secrets, credentials, or personal data.
   - type: textarea
     id: problem
     attributes:

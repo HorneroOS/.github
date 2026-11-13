@@ -1,0 +1,15 @@
+{
+  "context": {
+    "title": "feat(plugins): add clipboard history extension",
+    "body": "## Summary\nAdds a clipboard history extension.\n\n## Type\nfeat\n\n## Validation\nRan `npm test` in plugins repo.\n\n## Risks\nLow.\n\nCloses #42\n",
+    "author": "ulises-jeremias",
+    "isBot": false,
+    "isDraft": false,
+    "hasMergeCommits": false,
+    "additions": 200,
+    "deletions": 10,
+    "changedFiles": ["extensions/clipboard-history/index.ts"],
+    "fileContents": {},
+    "labels": []
+  }
+}

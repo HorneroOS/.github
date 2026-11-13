@@ -7,7 +7,32 @@ import { Finding, PRContext, info, warn } from "./types.js";
  * case-insensitively. It NEVER matches exact checkbox strings, so template
  * rewordings of checklist items cannot silently break detection.
  */
-export const REQUIRED_SECTIONS = ["summary", "type", "validation", "risks"] as const;
+/**
+ * Required PR-body sections, keyed by the first normalized heading word
+ * (see {@link detectSections}). They mirror the shared
+ * `.github/PULL_REQUEST_TEMPLATE.md` headings, including the Extensions
+ * 2.0 acceptance sections (HorneroOS/.github#26): "Linked owning issue"
+ * -> linked, "Duplicate-scope check" -> duplicate, "Declared
+ * capabilities" -> declared, "QA status" -> qa, "Tooltip &
+ * accessibility" -> tooltip, "Translation impact" -> translation,
+ * "Security notes" -> security, "Performance impact" -> performance.
+ * Missing sections warn (never fail): authors may answer a section with
+ * an explicit `N/A — <reason>`, which still counts as present.
+ */
+export const REQUIRED_SECTIONS = [
+  "summary",
+  "type",
+  "linked",
+  "duplicate",
+  "declared",
+  "validation",
+  "qa",
+  "tooltip",
+  "translation",
+  "security",
+  "performance",
+  "risks",
+] as const;
 
 export type SectionName = (typeof REQUIRED_SECTIONS)[number] | "checklist";
 

@@ -79,6 +79,7 @@ function main(): void {
     { name: "feature-request.yml", type: "Feature" },
     { name: "documentation.yml", type: "Task" },
     { name: "task-maintenance.yml", type: "Task" },
+    { name: "extension.yml", type: "Feature" },
   ];
   let failures = 0;
   for (const { name, type } of forms) {
