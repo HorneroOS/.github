@@ -1,6 +1,7 @@
 # HorneroOS
 
-**An Arch-based operating system family, with a Wayland-first desktop and a visual identity of its own.**
+**An Arch-based workstation operating-system family — Desktop · Studio ·
+Gaming — with a visual language of its own: Hornero Signal.**
 
 HorneroOS grows from more than eight years of Linux work: the real setup of
 [Ulises Jeremias](https://github.com/ulises-jeremias), continuously used,
@@ -13,101 +14,127 @@ the [HorneroOS organization](https://github.com/HorneroOS). Read more about the
 project's [roots and design history](https://horneroos.com/roots/).
 
 <p align="center">
-  <a href="https://horneroos.com/showroom/">
-    <img src="https://raw.githubusercontent.com/HorneroOS/website/main/assets/screenshots/certified/hornero-left.png" alt="HorneroOS Desktop with the Hornero Left layout and a landscape wallpaper" width="960">
+  <a href="https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md">
+    <img src="https://raw.githubusercontent.com/HorneroOS/docs/main/development/assets/signal-visual-language/concept-final-night.png" alt="Concept render, not a screenshot: the Hornero Signal Night direction for the Cockpit desktop, with a top rail and bottom strip, segmented meters and an audio popout" width="960">
   </a>
+  <br>
+  <sub><strong>Concept render — not a screenshot.</strong> The Hornero Signal
+  direction for the Cockpit desktop. Real Signal captures will replace it as
+  the redesigned shell surfaces land.</sub>
 </p>
 
 <p align="center">
   <a href="https://horneroos.com/">Explore HorneroOS</a> ·
-  <a href="https://horneroos.com/showroom/">See the desktop</a> ·
-  <a href="https://horneroos.com/docs/">Read the documentation</a> ·
+  <a href="https://horneroos.com/editions/">Editions</a> ·
+  <a href="https://horneroos.com/docs/">Documentation</a> ·
+  <a href="https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md">Hornero Signal RFC</a> ·
   <a href="https://github.com/HorneroOS/hornero/releases">Releases</a>
 </p>
 
-HorneroOS brings the system composition, desktop experience and everyday tools
-under one product. Its Desktop edition is built around Hornero Shell and
-Wayland; Hyprland is the supported default compositor, while Niri remains an
-experimental option. The desktop can move between calm, light, natural,
-minimal, synthwave and neon-city looks without losing its shared language.
+HorneroOS composes the system, the desktop and the everyday tools into one
+product. Every edition shares a Wayland-first desktop built around Hornero
+Shell; Hyprland is the supported default compositor, and Niri is
+experimental.
 
-## A desktop with range
+- **Desktop** — the everyday workstation for development and daily work.
+- **Studio** — Desktop plus a creative toolchain: PipeWire with JACK,
+  Ardour, Blender, Krita, Kdenlive and OBS Studio.
+- **Gaming** — Desktop plus 32-bit Vulkan, GameMode, Gamescope and
+  MangoHud.
 
-These are real HorneroOS captures: different layouts, surfaces and themes from
-the current desktop. Browse the [theme collection](https://horneroos.com/themes/),
-[layouts](https://horneroos.com/layouts/) and [showroom](https://horneroos.com/showroom/)
-for more views and wallpaper variety.
+## Hornero Signal
 
-<table>
-  <tr>
-    <td width="50%"><a href="https://horneroos.com/themes/"><img src="https://raw.githubusercontent.com/HorneroOS/website/main/assets/screenshots/certified/hornero-light.png" alt="HorneroOS Desktop in the bright Hornero Light appearance" width="100%"></a></td>
-    <td width="50%"><a href="https://horneroos.com/layouts/"><img src="https://raw.githubusercontent.com/HorneroOS/website/main/assets/screenshots/certified/cockpit-clear.png" alt="HorneroOS Cockpit Clear layout with a wide, transparent information bar" width="100%"></a></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Hornero Light · a bright, readable desktop</sub></td>
-    <td align="center"><sub>Cockpit Clear · a wide layout with a lighter footprint</sub></td>
-  </tr>
-  <tr>
-    <td width="50%"><a href="https://horneroos.com/showroom/"><img src="https://raw.githubusercontent.com/HorneroOS/website/main/assets/screenshots/certified/dashboard.png" alt="HorneroOS Dashboard with system status, controls and personal spaces" width="100%"></a></td>
-    <td width="50%"><a href="https://horneroos.com/layouts/"><img src="https://raw.githubusercontent.com/HorneroOS/website/main/assets/screenshots/certified/layout-picker.png" alt="HorneroOS Layout Picker comparing desktop bar and panel arrangements" width="100%"></a></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Dashboard · controls and system information in one place</sub></td>
-    <td align="center"><sub>Layout Picker · compare a layout before choosing it</sub></td>
-  </tr>
-</table>
+Hornero Signal is the design language for every first-party surface: shell,
+extensions, GTK and Qt apps, terminals, lock screen, login greeter, installer
+and website. Its direction is a contemporary engineering workstation from an
+alternate 1990s Argentina — broadcast control rooms, oscilloscope bezels,
+test cards and technical drawing sheets — executed with modern restraint.
+
+- **Work first.** Quiet, matte chrome. Amber marks what is live or primary;
+  celeste marks focus and information.
+- **Instrument, not toy.** Hairline rules, small radii, segmented meters,
+  tabular numerals in IBM Plex, and Hornero Glyphs for icons.
+- **Legible at a glance.** Every theme passes WCAG AA contrast checks, with
+  a high-contrast mode and reduced motion built in.
+- **Themes own colour.** Signal Night (the default), Signal Day, Signal High
+  Contrast and regional Hornero Originals are authored palettes; the
+  wallpaper never recolours the interface.
+
+Signal replaces the Material 3 design system the shell inherited. It is
+defined in [RFC 0001](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md)
+and the [Signal Visual Language](https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md),
+and tracked in [HorneroOS/.github#28](https://github.com/HorneroOS/.github/issues/28).
+It is on the `main` branches now and reaches installable media with the next
+Preview release; shell surfaces are still being redesigned.
+
+## Where the project stands
+
+HorneroOS is pre-release software. The
+[edition catalogue](https://github.com/HorneroOS/hornero/blob/main/editions/catalogue.yaml)
+and release notes are the source of truth for maturity; package availability
+alone does not mean an edition is supported.
+
+| Product area | Current status |
+| --- | --- |
+| **HorneroOS Desktop** | Preview. Hyprland is the supported default compositor. |
+| **HorneroOS Studio** | Preview. Installable from the Preview ISO; hardware validation is pending. |
+| **HorneroOS Gaming** | Preview. Installable from the Preview ISO; hardware validation is pending. |
+| **Niri desktop session** | Experimental. Capability and workflow coverage is still evolving. |
+| **Server and Agents** | Planned. Not offered as installable editions. |
+| **Hornero Signal** | In development on `main`. Preview ISOs up to v0.2.0-preview32 still ship the previous appearance. |
+| **Installation media** | Signed Preview ISO `v0.2.0-preview32` with SHA-256 and GPG signature; VM-tested on UEFI (unencrypted). Legacy BIOS, encrypted installs and physical hardware were not tested on this artifact. |
+
+See the [release page](https://horneroos.com/releases) and the
+[installation status](https://horneroos.com/install) before trying a build.
+Back up important data and use disposable hardware or a virtual machine for
+preview media.
 
 ## The maintainer's workspace
 
 This personal workstation capture was shared by HorneroOS's principal
-maintainer in October 2026. It shows one way to arrange the desktop alongside
-development tools; it is illustrative, not a QA capture, a supported default,
-or release-readiness evidence.
+maintainer in October 2026. It shows the **previous appearance, before
+Hornero Signal**, and one way to arrange the desktop alongside development
+tools. It is illustrative, not a QA capture, a supported default, or
+release-readiness evidence.
 
 <p align="center">
-  <img src="assets/maintainer-workstation-2026-10.png" alt="The HorneroOS maintainer's personal Wayland workstation, with a terminal system monitor, workspace list and quick controls open" width="1200">
+  <img src="assets/maintainer-workstation-2026-10.png" alt="Pre-Signal capture: the HorneroOS maintainer's personal Wayland workstation in October 2026, with a terminal system monitor, workspace list and quick controls open" width="1200">
 </p>
 
-## Where the project stands
+## Lineage and credits
 
-HorneroOS is pre-release software. The product catalogue and release notes are
-the source of truth for maturity; package availability alone does not mean an
-edition is supported.
-
-| Product area | Current status |
-| --- | --- |
-| **HorneroOS Desktop** | Preview; Hyprland is the supported default compositor. |
-| **Niri desktop session** | Experimental; capability and workflow coverage is still evolving. |
-| **HorneroOS Studio** | Preview; installable from the Preview ISO. Hardware validation is still pending. |
-| **Server and Agents** | Planned; not offered as installable editions yet. |
-| **Installation media** | Preview ISO `v0.2.0-preview22` with SHA-256 and GPG signature, tested in virtual machines (UEFI and BIOS). Physical hardware reports are welcome. |
-
-See the [current release notes](https://github.com/HorneroOS/hornero/releases)
-and the [installation documentation](https://github.com/HorneroOS/installer)
-before trying a build. Back up important data and use disposable hardware or a
-virtual machine for preview media.
+Hornero Shell began as a Quickshell extraction from the maintainer's
+dotfiles, whose runtime derives from
+[Caelestia's shell](https://github.com/caelestia-dots/shell) by
+[soramane](https://github.com/soramane). Its GPL-3.0 license and attribution
+are preserved in the shell's `NOTICE`. The **Hornero Left** and **Hornero
+Right** layouts are inspired by Caelestia's layout and say so. HorneroOS has
+since replaced the runtime's design system, appearance pipeline and
+interfaces with its own. IBM Plex (SIL OFL 1.1) and Tabler Icons (MIT) are
+credited where they ship.
 
 ## Find your way around
 
 For contribution routing and cross-repository source-of-truth boundaries,
 see the [repository map](../governance/docs/repository-map.md).
 
-For product and interface work, start with the shared
-[design language](https://horneroos.com/docs/development/design-language/),
-then check the current [edition catalogue](https://horneroos.com/editions/)
-and [compositor capability guide](https://horneroos.com/docs/desktop/compositors/).
-These documents explain the shared visual principles and current support
-boundaries; the repository map identifies where each implementation belongs.
+For product and interface work, start with
+[RFC 0001](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md)
+and the [design language](https://github.com/HorneroOS/docs/blob/main/development/design-language.md)
+in the docs repository (the website copy follows its pinned docs revision),
+then check the [edition catalogue](https://horneroos.com/editions/) and the
+[compositor capability guide](https://horneroos.com/docs/desktop/compositors/).
 
 | Repository | What it owns |
 | --- | --- |
-| [hornero](https://github.com/HorneroOS/hornero) | Edition catalogue, package composition, release pins and system integration. |
-| [shell](https://github.com/HorneroOS/shell) | Hornero Shell: bars, launcher, dashboard, notifications, Control Center and desktop interactions. |
-| [config](https://github.com/HorneroOS/config) | Declarative desktop defaults, theme and wallpaper catalogue, and system configuration. |
+| [hornero](https://github.com/HorneroOS/hornero) | Edition catalogue, package composition, release pins, `horneroctl` and system integration. |
+| [shell](https://github.com/HorneroOS/shell) | Hornero Shell: bars, launcher, dashboard, notifications, Control Center, PluginKit and desktop interactions. |
+| [config](https://github.com/HorneroOS/config) | Signal token schema and themes, desktop defaults, wallpapers, brand assets and system configuration. |
+| [plugins](https://github.com/HorneroOS/plugins) | First-party shell extensions and the curated extension catalogue. |
 | [greeter](https://github.com/HorneroOS/greeter) | SDDM login experience and its packaged visual assets. |
-| [installer](https://github.com/HorneroOS/installer) | Provisional installation workflow and media experiments; check its README for validation status. |
-| [docs](https://github.com/HorneroOS/docs) | User, contributor and architecture documentation. |
-| [website](https://github.com/HorneroOS/website) | The official product site, visual showcase and documentation experience. |
+| [installer](https://github.com/HorneroOS/installer) | Provisional installation workflow and media; check its README for validation status. |
+| [docs](https://github.com/HorneroOS/docs) | User, contributor and architecture documentation, including the design RFCs. |
+| [website](https://github.com/HorneroOS/website) | The official product site, captures and documentation experience. |
 | [qa](https://github.com/HorneroOS/qa) | Reproducible graphical and system acceptance evidence. |
 | [.github](https://github.com/HorneroOS/.github) | Organization profile, contribution guidance and community health files. |
 
@@ -115,8 +142,11 @@ boundaries; the repository map identifies where each implementation belongs.
 
 - **New to HorneroOS?** Explore [the website](https://horneroos.com/) and
   [Getting Started](https://horneroos.com/docs/).
+- **Choosing an edition?** Compare [Desktop, Studio and Gaming](https://horneroos.com/editions/).
 - **Looking for themes or layouts?** Visit the [theme gallery](https://horneroos.com/themes/)
-  and [layout guide](https://horneroos.com/layouts/).
+  and [layout guide](https://horneroos.com/layouts/). Desktop captures on
+  the website predate Hornero Signal and show the previous appearance until
+  Signal captures replace them.
 - **Planning an installation?** Read the [installation repository](https://github.com/HorneroOS/installer)
   and verify its current maturity before using any media.
 - **Following installer readiness?** Use the [public HorneroOS Installer project](https://github.com/orgs/HorneroOS/projects/1)

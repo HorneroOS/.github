@@ -2,9 +2,11 @@
 
 This repository powers the [HorneroOS organization profile](profile/README.md)
 and supplies community-health files to repositories that do not define their
-own. The public product is a pre-release, Arch-based operating system family:
-its Desktop is Wayland-first, with Hornero Shell at the center of the user
-experience. Current maturity lives in the
+own. The public product is a pre-release, Arch-based workstation operating
+system family — Desktop, Studio and Gaming — with a Wayland-first desktop
+built around Hornero Shell and one visual language,
+[Hornero Signal](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md).
+Current maturity lives in the
 [edition catalogue](https://github.com/HorneroOS/hornero/blob/main/editions/catalogue.yaml)
 and release notes, not in this repository.
 
