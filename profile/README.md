@@ -82,7 +82,7 @@ alone does not mean an edition is supported.
 | **Niri desktop session** | Experimental. Capability and workflow coverage is still evolving. |
 | **Server and Agents** | Planned. Not offered as installable editions. |
 | **Hornero Signal** | In development on `main`. Preview ISOs up to v0.2.0-preview32 still ship the previous appearance. |
-| **Installation media** | Signed Preview ISO `v0.2.0-preview32` with SHA-256 and GPG signature; VM-tested (UEFI and BIOS), no physical-hardware acceptance yet. |
+| **Installation media** | Signed Preview ISO `v0.2.0-preview32` with SHA-256 and GPG signature; VM-tested on UEFI (unencrypted). Legacy BIOS, encrypted installs and physical hardware were not tested on this artifact. |
 
 See the [release page](https://horneroos.com/releases) and the
 [installation status](https://horneroos.com/install) before trying a build.
@@ -118,9 +118,10 @@ credited where they ship.
 For contribution routing and cross-repository source-of-truth boundaries,
 see the [repository map](../governance/docs/repository-map.md).
 
-For product and interface work, start with the
-[design language](https://horneroos.com/docs/development/design-language/)
-and [RFC 0001](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md),
+For product and interface work, start with
+[RFC 0001](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md)
+and the [design language](https://github.com/HorneroOS/docs/blob/main/development/design-language.md)
+in the docs repository (the website copy follows its pinned docs revision),
 then check the [edition catalogue](https://horneroos.com/editions/) and the
 [compositor capability guide](https://horneroos.com/docs/desktop/compositors/).
 
@@ -143,8 +144,9 @@ then check the [edition catalogue](https://horneroos.com/editions/) and the
   [Getting Started](https://horneroos.com/docs/).
 - **Choosing an edition?** Compare [Desktop, Studio and Gaming](https://horneroos.com/editions/).
 - **Looking for themes or layouts?** Visit the [theme gallery](https://horneroos.com/themes/)
-  and [layout guide](https://horneroos.com/layouts/). Captures taken before
-  Hornero Signal are labelled as the previous appearance.
+  and [layout guide](https://horneroos.com/layouts/). Desktop captures on
+  the website predate Hornero Signal and show the previous appearance until
+  Signal captures replace them.
 - **Planning an installation?** Read the [installation repository](https://github.com/HorneroOS/installer)
   and verify its current maturity before using any media.
 - **Following installer readiness?** Use the [public HorneroOS Installer project](https://github.com/orgs/HorneroOS/projects/1)
