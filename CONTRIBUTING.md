@@ -21,10 +21,10 @@ The short routing table is:
 | --- | --- |
 | Editions, package composition, release definitions | [hornero](https://github.com/HorneroOS/hornero) |
 | Desktop shell, settings, bars and interactions | [shell](https://github.com/HorneroOS/shell) |
-| Declarative configuration, themes and wallpapers | [config](https://github.com/HorneroOS/config) |
+| Declarative configuration, Signal tokens, themes and wallpapers | [config](https://github.com/HorneroOS/config) |
+| Design language (Hornero Signal RFC) and handbook | [docs](https://github.com/HorneroOS/docs) |
 | Login screen | [greeter](https://github.com/HorneroOS/greeter) |
 | Installation workflow | [installer](https://github.com/HorneroOS/installer) |
-| User and contributor documentation | [docs](https://github.com/HorneroOS/docs) |
 | Official website and showcase | [website](https://github.com/HorneroOS/website) |
 | Plugins and extension packages | [plugins](https://github.com/HorneroOS/plugins) |
 | System and graphical acceptance | [qa](https://github.com/HorneroOS/qa) |
