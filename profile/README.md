@@ -14,13 +14,10 @@ the [HorneroOS organization](https://github.com/HorneroOS). Read more about the
 project's [roots and design history](https://horneroos.com/roots/).
 
 <p align="center">
-  <a href="https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md">
-    <img src="https://raw.githubusercontent.com/HorneroOS/docs/main/development/assets/signal-visual-language/concept-final-night.png" alt="Concept render, not a screenshot: the Hornero Signal Night direction for the Cockpit desktop, with a top rail and bottom strip, segmented meters and an audio popout" width="960">
-  </a>
+  <img src="https://www.horneroos.com/captures/cap-theme-05.png" alt="Empty HorneroOS desktop over a Patagonian glacial lake and peaks at sunset, dark Signal bars top and bottom, hornero bird at lower right" width="960">
   <br>
-  <sub><strong>Concept render — not a screenshot.</strong> The Hornero Signal
-  direction for the Cockpit desktop. Real Signal captures will replace it as
-  the redesigned shell surfaces land.</sub>
+  <sub>Patagonia, a Hornero Original — real capture. Photo credit on
+  <a href="https://horneroos.com/themes/">Wallpapers</a>.</sub>
 </p>
 
 <p align="center">
@@ -88,18 +85,6 @@ See the [release page](https://horneroos.com/releases) and the
 [installation status](https://horneroos.com/install) before trying a build.
 Back up important data and use disposable hardware or a virtual machine for
 preview media.
-
-## The maintainer's workspace
-
-This personal workstation capture was shared by HorneroOS's principal
-maintainer in October 2026. It shows the **previous appearance, before
-Hornero Signal**, and one way to arrange the desktop alongside development
-tools. It is illustrative, not a QA capture, a supported default, or
-release-readiness evidence.
-
-<p align="center">
-  <img src="assets/maintainer-workstation-2026-10.png" alt="Pre-Signal capture: the HorneroOS maintainer's personal Wayland workstation in October 2026, with a terminal system monitor, workspace list and quick controls open" width="1200">
-</p>
 
 ## Lineage and credits
 
