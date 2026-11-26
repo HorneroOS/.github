@@ -68,7 +68,28 @@ jobs:
         working-directory: .governance-engine/governance/danger
         run: npm run build
 
-      - name: Run Danger
+      - name: Run Danger (same-repo PR)
+        if: ${{ !github.event.pull_request.head.repo.fork }}
         env:
           GITHUB_TOKEN: ${{ inputs.github-token != '' && inputs.github-token || secrets.GITHUB_TOKEN }}
         run: .governance-engine/governance/danger/node_modules/.bin/danger ci --dangerfile .governance-engine/governance/danger/dist/src/dangerfile.js
+
+      - name: Run Danger (fork PR — step summary)
+        if: ${{ github.event.pull_request.head.repo.fork }}
+        env:
+          GITHUB_TOKEN: ${{ inputs.github-token != '' && inputs.github-token || secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          OUTPUT=$(.governance-engine/governance/danger/node_modules/.bin/danger ci --text-only --dangerfile .governance-engine/governance/danger/dist/src/dangerfile.js 2>&1)
+          STATUS=$?
+          set -e
+          {
+            echo "## PR Governance (fork PR)"
+            echo ""
+            echo "_Fork PRs have read-only \`GITHUB_TOKEN\`; findings are written here instead of a PR comment._"
+            echo ""
+            echo '```'
+            printf '%s\n' "$OUTPUT"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$STATUS"

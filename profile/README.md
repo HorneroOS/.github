@@ -61,8 +61,9 @@ Signal replaces the Material 3 design system the shell inherited. It is
 defined in [RFC 0001](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md)
 and the [Signal Visual Language](https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md),
 and tracked in [HorneroOS/.github#28](https://github.com/HorneroOS/.github/issues/28).
-It is on the `main` branches now and reaches installable media with the next
-Preview release; shell surfaces are still being redesigned.
+Hornero Signal is live on `main` and ships in the `v0.2.0-preview41` Preview
+release (including the AUR / Install-on-Arch path); shell surfaces continue to
+be refined.
 
 ## Where the project stands
 
@@ -78,8 +79,8 @@ alone does not mean an edition is supported.
 | **HorneroOS Gaming** | Preview. Installable from the Preview ISO; hardware validation is pending. |
 | **Niri desktop session** | Experimental. Capability and workflow coverage is still evolving. |
 | **Server and Agents** | Planned. Not offered as installable editions. |
-| **Hornero Signal** | In development on `main`. Preview ISOs up to v0.2.0-preview32 still ship the previous appearance. |
-| **Installation media** | Signed Preview ISO `v0.2.0-preview32` with SHA-256 and GPG signature; VM-tested on UEFI (unencrypted). Legacy BIOS, encrypted installs and physical hardware were not tested on this artifact. |
+| **Hornero Signal** | Live on `main` and shipped in `v0.2.0-preview41`; shell surfaces continue to be refined. |
+| **Installation & AUR** | `v0.2.0-preview41` is available via the AUR / Install-on-Arch path and signed Preview ISO media (SHA-256 + GPG; VM-tested on UEFI unencrypted). Legacy BIOS, encrypted installs and physical hardware remain under validation. |
 
 See the [release page](https://horneroos.com/releases) and the
 [installation status](https://horneroos.com/install) before trying a build.

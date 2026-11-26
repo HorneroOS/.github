@@ -15,10 +15,11 @@ contributor guidance.
 
 ## Questions and discussion
 
-- General questions about Hornero OS as a product:
+- General questions about HorneroOS as a product:
   [HorneroOS/hornero discussions](https://github.com/HorneroOS/hornero/discussions).
 - Component-specific questions: use the issue tracker of the relevant
   repository ([shell](https://github.com/HorneroOS/shell),
+  [plugins](https://github.com/HorneroOS/plugins),
   [config](https://github.com/HorneroOS/config),
   [installer](https://github.com/HorneroOS/installer),
   [docs](https://github.com/HorneroOS/docs),

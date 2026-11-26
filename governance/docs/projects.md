@@ -13,7 +13,7 @@ lives on issues, taxonomy in
 | --- | --- | --- |
 | [1 · HorneroOS Installer](https://github.com/orgs/HorneroOS/projects/1) | Installation outcomes and acceptance; transition to Panda Foss's official installer | installer + blocking cross-repo work |
 | [2 · HorneroOS Roadmap](https://github.com/orgs/HorneroOS/projects/2) | Umbrella: **every** organization issue (open and closed), grouped by M0–M5 milestone | cross-repo sequencing against [hornero#154](https://github.com/HorneroOS/hornero/issues/154) |
-| [3 · HorneroOS Shell & Desktop](https://github.com/orgs/HorneroOS/projects/3) | Desktop experience | shell, greeter, config issues |
+| [3 · HorneroOS Shell & Desktop](https://github.com/orgs/HorneroOS/projects/3) | Desktop experience & extensions | shell, plugins, greeter, config issues |
 | [4 · HorneroOS Platform & Release](https://github.com/orgs/HorneroOS/projects/4) | Core platform, releases, acceptance | hornero, qa issues |
 | [5 · HorneroOS Docs, Web & Governance](https://github.com/orgs/HorneroOS/projects/5) | Handbook, website, org governance | docs, website, .github issues |
 
