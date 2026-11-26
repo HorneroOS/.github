@@ -12,13 +12,13 @@ automatically unless it defines its own file of the same kind.
   plus `config.yml` with `blank_issues_enabled: false` and contact links to
   Discussions, documentation, the contributing guide, and the security
   policy.
-- **Pull request template** (`.github/PULL_REQUEST_TEMPLATE.md`): Summary,
-  Type (`feat`/`fix`/`docs`/`refactor`/`chore`), Why, Scope, Validation
-  (exact per-repo commands), Evidence, Risks & rollback, Related issues,
-  and a small checklist (English, conventional title at most 100
-  characters, no secrets, focused PR, docs updated, validation green).
+- **Pull request template** (`.github/PULL_REQUEST_TEMPLATE.md`): a slim
+  4-section default — `Summary`, `Verification`, `Risk / Breaking Changes`,
+  and `Linked Issue` — paired with conventional titles (`type(scope): subject`,
+  at most 100 characters).
 - **Label taxonomy** (`governance/labels.yml`): the canonical `type:*`,
-  `area:*`, `status:*`, and `priority:*` labels. Small on purpose.
+  `area:*` (including `area:extensions`), `status:*`, and `priority:*`
+  labels. Small on purpose.
 - **Native issue types**: the forms assign organization-level `Bug`,
   `Feature`, or `Task` types. Docs and maintenance work use `Task`; labels
   remain useful for cross-repository automation and filtering.
@@ -75,8 +75,10 @@ ownership of installer behavior and release decisions.
 - Merge only green, where ownership permits. Shared issue forms and additive
   label sync apply to the installer repository just as they do elsewhere.
 
-## What this half does NOT do
+## PR governance engine
 
-The deterministic Danger PR-governance engine (TypeScript, reusable
-`workflow_call`, pinned by SHA) lands as a separate change. This half adds
-no merge gates and changes no repository besides `.github` itself.
+The deterministic Danger PR-governance engine (`governance/danger/`,
+TypeScript, reusable `workflow_call` in
+`.github/workflows/pr-governance.yml`, pinned by SHA) runs on pull
+requests across adopting repositories. Fork PRs write findings to
+`GITHUB_STEP_SUMMARY` so they never fail with `403` on read-only tokens.

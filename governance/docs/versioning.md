@@ -24,12 +24,9 @@ uses: HorneroOS/.github/.github/workflows/pr-governance.yml@<full-SHA> # governa
 - Keep the `# governance-vN` comment so the intended version is visible.
 - Bump by updating the SHA + comment in a focused PR.
 
-## This change (org-defaults half)
+## Release cadence
 
-This half ships the issue forms, PR template, label taxonomy, additive
-sync, and docs. It intentionally does NOT include the Danger
-PR-governance engine or the reusable `workflow_call`:
-
-- Do not merge-gate on checks that do not exist yet.
-- The Danger engine (TypeScript, strict `tsc`, typed policy schema) lands
-  separately and will be versioned with the first `governance-*` tag.
+Both the org defaults (issue forms, PR template, label taxonomy, additive
+sync) and the Danger PR-governance engine (`governance/danger/`) are
+versioned together under `governance-*` tags. Caller repositories upgrade
+deliberately by bumping the pinned SHA and `# governance-vN` comment.

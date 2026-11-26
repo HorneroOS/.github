@@ -59,6 +59,7 @@ body:
         - area:ci
         - area:security
         - area:infra
+        - area:extensions
       default: 0
     validations:
       required: false

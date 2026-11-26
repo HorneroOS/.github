@@ -13,6 +13,7 @@ HorneroOS/hornero  defines editions, capabilities, package composition, and rele
         │
         ├── HorneroOS/config   provides portable system and desktop defaults
         ├── HorneroOS/shell    provides the Wayland-first Hornero desktop shell
+        ├── HorneroOS/plugins  provides first-party shell extensions and the extension catalogue
         ├── HorneroOS/greeter  provides the SDDM login experience
         └── HorneroOS/installer consumes product composition for installation
                     │

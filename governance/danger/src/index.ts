@@ -13,6 +13,7 @@ import { checkPins } from "./pins.js";
 
 const DOCS_URL = "https://github.com/HorneroOS/docs";
 const CONTRIBUTING_URL = "https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md";
+const VM_RELEVANT_KINDS = new Set(["os", "hornero", "shell", "installer", "config", "greeter"]);
 
 /**
  * Run every rule and return the ordered findings.
@@ -36,8 +37,9 @@ export function evaluatePR(ctx: PRContext, policy: RepoPolicy): Finding[] {
     ...checkBreakingChange(ctx),
     ...checkLinkedIssue(ctx),
     // Always-on guidance (message).
-    info("pr-commands", "Governance commands: post `/checklist` for the human checklist."),
-    info("vm-reminder", "If you changed runtime behavior, validate it in a VM before requesting review."),
+    ...(VM_RELEVANT_KINDS.has(policy.kind.toLowerCase())
+      ? [info("vm-reminder", "If you changed runtime behavior, validate it in a VM before requesting review.")]
+      : []),
     info("docs-links", `Docs: ${DOCS_URL} — Contributing: ${CONTRIBUTING_URL}`),
   ];
   return findings;

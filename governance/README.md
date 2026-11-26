@@ -14,6 +14,9 @@ Organization defaults for HorneroOS repositories, owned by the
   may reference only labels listed here.
 - [`label-sync/`](label-sync/) — additive label-sync tooling (TypeScript,
   strict `tsc`, typed schemas) plus the form-label validator.
+- [`danger/`](danger/) — deterministic PR-governance Danger engine
+  (TypeScript, strict `tsc`, typed policy schema), consumed via the
+  reusable `.github/workflows/pr-governance.yml` workflow.
 - [`docs/`](docs/) — how the defaults work and how to use them.
 
 ## Rules
@@ -23,8 +26,8 @@ Organization defaults for HorneroOS repositories, owned by the
 2. Forms reference only canonical labels from `labels.yml`.
 3. Label sync is additive — it never deletes repository-specific labels.
 4. All new governance tooling is TypeScript (strict `tsc`, typed schemas).
-5. The Danger PR-governance engine lands separately; this half does not
-   merge-gate anything. See [`docs/versioning.md`](docs/versioning.md).
+5. Governance workflows are versioned with `governance-*` tags and pinned
+   by full commit SHA in caller repositories. See [`docs/versioning.md`](docs/versioning.md).
 
 Start with [`docs/defaults.md`](docs/defaults.md), then read
 [`docs/inheritance-trap.md`](docs/inheritance-trap.md) before touching any

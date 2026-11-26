@@ -9,32 +9,29 @@ import { Finding, PRContext, info, warn } from "./types.js";
  */
 /**
  * Required PR-body sections, keyed by the first normalized heading word
- * (see {@link detectSections}). They mirror the shared
- * `.github/PULL_REQUEST_TEMPLATE.md` headings, including the Extensions
- * 2.0 acceptance sections (HorneroOS/.github#26): "Linked owning issue"
- * -> linked, "Duplicate-scope check" -> duplicate, "Declared
- * capabilities" -> declared, "QA status" -> qa, "Tooltip &
- * accessibility" -> tooltip, "Translation impact" -> translation,
- * "Security notes" -> security, "Performance impact" -> performance.
+ * (see {@link detectSections}). They mirror the shared 4-section
+ * `.github/PULL_REQUEST_TEMPLATE.md` headings:
+ * - "Summary" -> summary
+ * - "Verification" -> verification
+ * - "Risk / Breaking Changes" -> risk
+ * - "Linked Issue" -> linked
+ *
  * Missing sections warn (never fail): authors may answer a section with
- * an explicit `N/A — <reason>`, which still counts as present.
+ * an explicit `N/A — <reason>` or `None`, which still counts as present.
  */
 export const REQUIRED_SECTIONS = [
   "summary",
-  "type",
+  "verification",
+  "risk",
   "linked",
-  "duplicate",
-  "declared",
-  "validation",
-  "qa",
-  "tooltip",
-  "translation",
-  "security",
-  "performance",
-  "risks",
 ] as const;
 
-export type SectionName = (typeof REQUIRED_SECTIONS)[number] | "checklist";
+export type SectionName = (typeof REQUIRED_SECTIONS)[number];
+
+const SECTION_ALIASES: Record<string, SectionName> = {
+  validation: "verification",
+  risks: "risk",
+};
 
 function headingAt(line: string): string | null {
   const atx = /^\s*#{1,6}\s+(.+?)\s*$/.exec(line);
@@ -62,7 +59,8 @@ export function detectSections(body: string): Record<string, string> {
   }
   const out: Record<string, string> = {};
   for (const [k, v] of Object.entries(sections)) {
-    const key = k.split(" ")[0] ?? k;
+    const rawKey = k.split(" ")[0] ?? k;
+    const key = SECTION_ALIASES[rawKey] ?? rawKey;
     if (key !== undefined && !(key in out)) out[key] = (v ?? "").trim();
   }
   return out;

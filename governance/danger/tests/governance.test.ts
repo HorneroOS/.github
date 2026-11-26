@@ -1,6 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import * as fs from "node:fs";
+import * as os from "node:os";
 import * as path from "node:path";
 import { evaluatePR } from "../src/index.js";
 import { defaultPolicy, loadPolicy } from "../src/policy.js";
@@ -29,30 +30,37 @@ void describe("HorneroOS PR-governance engine", () => {
     const { findings } = load("good-feature");
     assert.deepEqual(rules(findings, "fail"), []);
     assert.ok(rules(findings, "message").includes("docs-links"));
-    // Fixture uses the template's conventional-commit vocabulary ("feat").
-    assert.ok(!rules(findings, "warn").includes("body-type"));
-    // Fixture fills every shared-template section, Extensions 2.0 included.
+    assert.ok(!rules(findings, "message").includes("pr-commands"));
     assert.ok(!rules(findings, "warn").includes("body-sections"));
   });
 
-  void it("extension-missing-sections: warns naming each missing acceptance section", () => {
+  void it("missing-sections: warns naming missing required sections", () => {
     const { findings } = load("extension-missing-sections");
     assert.deepEqual(rules(findings, "fail"), []);
     const sectionWarn = findings.find((f) => f.rule === "body-sections");
     assert.ok(sectionWarn !== undefined, "expected a body-sections warning");
-    for (const key of [
-      "linked",
-      "duplicate",
-      "declared",
-      "qa",
-      "tooltip",
-      "translation",
-      "security",
-      "performance",
-    ]) {
+    assert.ok(
+      sectionWarn.detail.includes("linked"),
+      `warning should name missing section "linked": ${sectionWarn.detail}`,
+    );
+  });
+
+  void it("vm-reminder: emitted only for OS/shell/installer/config/greeter repos", () => {
+    const { ctx } = load("good-feature");
+    const shellFindings = evaluatePR(ctx, { ...defaultPolicy(), kind: "shell" });
+    assert.ok(rules(shellFindings, "message").includes("vm-reminder"));
+    const docsFindings = evaluatePR(ctx, { ...defaultPolicy(), kind: "docs" });
+    assert.ok(!rules(docsFindings, "message").includes("vm-reminder"));
+  });
+
+  void it("linked-issue: type:docs and area:docs labels exempt PR from linked-issue warn", () => {
+    const { ctx } = load("good-feature");
+    const baseCtx: PRContext = { ...ctx, body: "## Summary\nSmall update.\n\n## Verification\nChecked.\n\n## Risk / Breaking Changes\nNone.\n\n## Linked Issue\nNone.\n" };
+    for (const label of ["type:docs", "area:docs"]) {
+      const findings = evaluatePR({ ...baseCtx, labels: [label] }, defaultPolicy());
       assert.ok(
-        sectionWarn.detail.includes(key),
-        `warning should name missing section "${key}": ${sectionWarn.detail}`,
+        !rules(findings, "warn").includes("linked-issue"),
+        `label "${label}" should exempt from linked-issue warning`,
       );
     }
   });
@@ -126,7 +134,7 @@ void describe("HorneroOS PR-governance engine", () => {
   });
 
   void it("loadPolicy: HORNERO_POLICY_PATH override wins over defaults", () => {
-    const dir = fs.mkdtempSync(path.join(fs.realpathSync("/tmp"), "gov-policy-"));
+    const dir = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), "gov-policy-"));
     const file = path.join(dir, "custom.yml");
     fs.writeFileSync(
       file,
@@ -143,13 +151,13 @@ void describe("HorneroOS PR-governance engine", () => {
   void it("loadPolicy: missing file falls back to defaults", () => {
     const policy = loadPolicy(
       { HORNERO_POLICY_PATH: "/nonexistent/hornero-governance.yml" },
-      "/tmp",
+      os.tmpdir(),
     );
     assert.deepEqual(policy, defaultPolicy());
   });
 
   void it("loadPolicy: malformed file falls back to defaults", () => {
-    const dir = fs.mkdtempSync(path.join(fs.realpathSync("/tmp"), "gov-policy-"));
+    const dir = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), "gov-policy-"));
     const file = path.join(dir, "broken.yml");
     fs.writeFileSync(file, "version: [unclosed\n\tbad: : :\n", "utf8");
     const policy = loadPolicy({ HORNERO_POLICY_PATH: file }, dir);

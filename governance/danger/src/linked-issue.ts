@@ -2,7 +2,7 @@ import { Finding, PRContext, info, warn } from "./types.js";
 import { isDocsOnly, isTrivial } from "./size.js";
 
 const ISSUE_RE = /#\d+|(clos|fix|resolv)(e|es|ing)\s+#?\d+/i;
-const DOC_LABELS = ["docs", "documentation"];
+const DOC_LABELS = ["type:docs", "area:docs", "docs", "documentation"];
 
 /**
  * Every non-trivial PR should reference an issue (or carry a docs label).
