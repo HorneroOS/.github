@@ -14,7 +14,7 @@ HorneroOS/hornero  defines editions, capabilities, package composition, and rele
         ├── HorneroOS/config   provides portable system and desktop defaults
         ├── HorneroOS/shell    provides the Wayland-first Hornero desktop shell
         ├── HorneroOS/plugins  provides first-party shell extensions and the extension catalogue
-        ├── HorneroOS/greeter  provides the SDDM login experience
+        ├── HorneroOS/greeter  provides the SDDM and greetd login experiences
         └── HorneroOS/installer consumes product composition for installation
                     │
                     └── HorneroOS/qa validates integrated system outcomes
@@ -31,11 +31,11 @@ README and CI remain authoritative for its implementation and checks.
 
 | Repository | Owns | Does not own |
 | --- | --- | --- |
-| [`hornero`](https://github.com/HorneroOS/hornero) | Product composition: the edition catalogue, compositor choices and maturity, package sets, release manifests, `horneroctl`, and integration contracts. `editions/catalogue.yaml` is the source of truth consumed by installation and QA. | The Shell's UI, reusable desktop configuration, SDDM theme implementation, or installer UI. |
+| [`hornero`](https://github.com/HorneroOS/hornero) | Product composition: the edition catalogue, compositor choices and maturity, package sets, release manifests, `horneroctl`, and integration contracts. `editions/catalogue.yaml` is the source of truth consumed by installation and QA. | The Shell's UI, reusable desktop configuration, login greeter implementation, or installer UI. |
 | [`config`](https://github.com/HorneroOS/config) | Portable, declarative desktop/system defaults, the Hornero Signal token schema and theme catalogue, wallpapers, brand assets, and the materialization tooling for those defaults. | A person's machine-specific dotfiles, Shell UI, or edition/release composition. |
 | [`shell`](https://github.com/HorneroOS/shell) | Hornero Shell runtime and interactions: bars, Launcher, Dashboard, Control Center, notifications, lock surfaces, theme/wallpaper presentation, and Shell-owned assets and integrations. | Edition/package truth, compositor-wide configuration, or OS management commands; it consumes contracts and defaults owned elsewhere. |
 | [`plugins`](https://github.com/HorneroOS/plugins) | First-party Hornero Shell extensions and the curated extension catalogue used for discovery. | The PluginKit API and Shell runtime (owned by `shell`). |
-| [`greeter`](https://github.com/HorneroOS/greeter) | Hornero's SDDM login theme, its runtime assets, media packs, and packaging. | The desktop session, Shell, or edition catalogue. |
+| [`greeter`](https://github.com/HorneroOS/greeter) | Hornero's SDDM theme and native greetd greeter (`hornero-greetd-greeter`), runtime assets, and packaging. | The desktop session, Shell, or edition catalogue. |
 | [`installer`](https://github.com/HorneroOS/installer) | The current provisional Calamares install workflow and the provisional Archiso bootable medium. It consumes a pinned Hornero catalogue rather than maintaining its own edition list. | The canonical product catalogue, system defaults, or the official custom-installer design owned by Panda Foss. |
 | [`qa`](https://github.com/HorneroOS/qa) | System-level acceptance scenarios, disposable-environment orchestration, and reproducible evidence for integrated Hornero states. | Unit/component tests owned by each code repository or product behavior itself. |
 | [`docs`](https://github.com/HorneroOS/docs) | The canonical user, contributor, troubleshooting, and architecture handbook, and design RFCs such as RFC 0001 — Hornero Signal. The website imports reviewed documentation content from here. | Product implementation or a second copy of package/catalogue truth. |

@@ -1,13 +1,15 @@
 /**
  * Danger entry point for HorneroOS PR governance.
  *
- * Async-safe: the async `run()` is invoked via `void`, so there are no
- * floating promises. Deterministic: no LLM, no secrets handling, no test
- * duplication — pure policy functions from `src/` decide everything.
+ * Async-safe: `run()` is registered via Danger's `schedule()` (with a `.catch()`
+ * fallback when invoked outside Danger) so rejected promises fail the run
+ * rather than being silently dropped. Deterministic: no LLM, no secrets
+ * handling, no test duplication — pure policy functions from `src/` decide
+ * everything.
  */
 // Danger injects the DSL as bare globals (`danger`, `fail`, `warn`,
-// `message`) before loading this file, so they are *declared* — never
-// imported. An `import ... from "danger"` would compile to
+// `message`, `schedule`) before loading this file, so they are *declared* —
+// never imported. An `import ... from "danger"` would compile to
 // `danger_1.danger`, but cleanDangerfile strips the require line and the
 // reference would dangle. Declarations keep full tsc checking of this
 // file (the DSL is consumed through defensive casts) and emit zero code.
@@ -15,6 +17,7 @@ declare const danger: any;
 declare function fail(message: string): void;
 declare function warn(message: string): void;
 declare function message(message: string): void;
+declare function schedule(asyncFunction: Promise<unknown> | (() => Promise<unknown>)): void;
 // NOTE: plain `require` (not `import *`) on purpose. Danger loads this file
 // through cleanDangerfile + require-from-string, and cleanDangerfile's
 // require("danger") pattern swallows every line from the first `var` down
@@ -113,5 +116,13 @@ async function run(): Promise<void> {
   }
 }
 
-// Async-safe invocation: no floating promise (strict tsc + review gate).
-void run();
+// Register with Danger's scheduler so rejected promises fail the job;
+// fall back to `.catch` with non-zero exitCode outside Danger's runtime.
+if (typeof schedule === "function") {
+  schedule(run());
+} else {
+  void run().catch((err: unknown) => {
+    console.error(err);
+    process.exitCode = 1;
+  });
+}
