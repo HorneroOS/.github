@@ -103,20 +103,23 @@ export function parsePolicy(raw: unknown): RepoPolicy {
 /**
  * Load the repo policy for a Danger run.
  *
- * Resolution order: `HORNERO_POLICY_PATH` (absolute, or relative to
- * `rootDir`) wins so a shared engine checkout can govern a *caller* repo;
- * otherwise the conventional `.github/hornero-governance.yml[.yaml]`
- * candidates under `rootDir` are tried. Missing or unparsable files fall
- * back to `defaultPolicy()` — governance degrades to warn-only defaults,
- * never to silence.
+ * Resolution order: `HORNERO_POLICY_PATH` (or `HORNERO_GOVERNANCE_POLICY`,
+ * absolute or relative to `rootDir`) wins so a shared engine checkout can
+ * govern a *caller* repo from a trusted base-branch policy file; otherwise
+ * the conventional `.github/hornero-governance.yml[.yaml]` candidates under
+ * `rootDir` are tried. Missing files fall back to `defaultPolicy()`; existing
+ * files that fail YAML parsing or policy validation throw an error so
+ * malformed governance config fails closed instead of silently bypassing rules.
  */
 export function loadPolicy(
   env: NodeJS.ProcessEnv = process.env,
   rootDir: string = process.cwd(),
 ): RepoPolicy {
-  const override = env["HORNERO_POLICY_PATH"];
+  const override = [env["HORNERO_POLICY_PATH"], env["HORNERO_GOVERNANCE_POLICY"]].find(
+    (v): v is string => typeof v === "string" && v.length > 0,
+  );
   const candidates =
-    typeof override === "string" && override.length > 0
+    override !== undefined
       ? [path.resolve(rootDir, override)]
       : [".github/hornero-governance.yml", ".github/hornero-governance.yaml"].map(
           (rel) => path.join(rootDir, rel),
@@ -125,8 +128,11 @@ export function loadPolicy(
     if (!fs.existsSync(abs)) continue;
     try {
       return parsePolicy(yaml.load(fs.readFileSync(abs, "utf8")));
-    } catch {
-      return defaultPolicy();
+    } catch (err: unknown) {
+      const detail = err instanceof Error ? err.message : String(err);
+      throw new Error(`Failed to load governance policy from ${abs}: ${detail}`, {
+        cause: err,
+      });
     }
   }
   return defaultPolicy();

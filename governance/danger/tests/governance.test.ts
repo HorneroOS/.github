@@ -133,19 +133,43 @@ void describe("HorneroOS PR-governance engine", () => {
     assert.ok(rules(findings, "warn").includes("risky-area"));
   });
 
-  void it("loadPolicy: HORNERO_POLICY_PATH override wins over defaults", () => {
+  void it("loadPolicy: HORNERO_POLICY_PATH override wins over repo-local policy (including nonexistent base)", () => {
     const dir = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), "gov-policy-"));
-    const file = path.join(dir, "custom.yml");
-    fs.writeFileSync(
-      file,
-      "version: 1\nkind: shell\nvisual_paths:\n  - 'waybar/**'\npolicies:\n  large_threshold: 123\n",
-      "utf8",
-    );
-    const policy = loadPolicy({ HORNERO_POLICY_PATH: file }, dir);
-    assert.equal(policy.kind, "shell");
-    assert.equal(policy.largeThreshold, 123);
-    assert.deepEqual(policy.visualPaths, ["waybar/**"]);
-    fs.rmSync(dir, { recursive: true, force: true });
+    try {
+      const repoPolicyDir = path.join(dir, ".github");
+      fs.mkdirSync(repoPolicyDir, { recursive: true });
+      fs.writeFileSync(
+        path.join(repoPolicyDir, "hornero-governance.yml"),
+        "version: 1\nkind: docs\npolicies:\n  forbidden_paths: []\n  large_threshold: 99999\n",
+        "utf8",
+      );
+
+      const baseFile = path.join(dir, "base-policy.yml");
+      fs.writeFileSync(
+        baseFile,
+        "version: 1\nkind: shell\nvisual_paths:\n  - 'waybar/**'\npolicies:\n  large_threshold: 123\n",
+        "utf8",
+      );
+
+      const policy = loadPolicy({ HORNERO_POLICY_PATH: baseFile }, dir);
+      assert.equal(policy.kind, "shell");
+      assert.equal(policy.largeThreshold, 123);
+      assert.deepEqual(policy.visualPaths, ["waybar/**"]);
+
+      const viaAlias = loadPolicy({ HORNERO_GOVERNANCE_POLICY: baseFile }, dir);
+      assert.equal(viaAlias.kind, "shell");
+      assert.equal(viaAlias.largeThreshold, 123);
+
+      // When the base branch has no policy file, pointing HORNERO_POLICY_PATH to a
+      // nonexistent temp file must still return defaultPolicy() and ignore PR-head files.
+      const fallback = loadPolicy(
+        { HORNERO_POLICY_PATH: path.join(dir, "absent-base-policy.yml") },
+        dir,
+      );
+      assert.deepEqual(fallback, defaultPolicy());
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
   });
 
   void it("loadPolicy: missing file falls back to defaults", () => {
@@ -156,13 +180,84 @@ void describe("HorneroOS PR-governance engine", () => {
     assert.deepEqual(policy, defaultPolicy());
   });
 
-  void it("loadPolicy: malformed file falls back to defaults", () => {
+  void it("loadPolicy: malformed or invalid existing file fails closed", () => {
     const dir = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), "gov-policy-"));
-    const file = path.join(dir, "broken.yml");
-    fs.writeFileSync(file, "version: [unclosed\n\tbad: : :\n", "utf8");
-    const policy = loadPolicy({ HORNERO_POLICY_PATH: file }, dir);
-    assert.deepEqual(policy, defaultPolicy());
-    fs.rmSync(dir, { recursive: true, force: true });
+    try {
+      const brokenOverride = path.join(dir, "broken.yml");
+      fs.writeFileSync(brokenOverride, "version: [unclosed\n\tbad: : :\n", "utf8");
+      assert.throws(
+        () => loadPolicy({ HORNERO_POLICY_PATH: brokenOverride }, dir),
+        /Failed to load governance policy/,
+      );
+
+      const repoPolicyDir = path.join(dir, ".github");
+      fs.mkdirSync(repoPolicyDir, { recursive: true });
+      fs.writeFileSync(
+        path.join(repoPolicyDir, "hornero-governance.yml"),
+        "version: [unclosed\n\tbad: : :\n",
+        "utf8",
+      );
+      assert.throws(
+        () => loadPolicy({}, dir),
+        /Failed to load governance policy/,
+      );
+
+      const badVersion = path.join(dir, "bad-version.yml");
+      fs.writeFileSync(badVersion, "version: 99\nkind: shell\n", "utf8");
+      assert.throws(
+        () => loadPolicy({ HORNERO_POLICY_PATH: badVersion }, dir),
+        /Failed to load governance policy.*unsupported policy version: 99/,
+      );
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  void it("dangerfile build: schedules run() and propagates policy load failures", async () => {
+    const dir = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), "gov-dangerfile-"));
+    const broken = path.join(dir, "broken.yml");
+    fs.writeFileSync(broken, "version: [unclosed\n\tbad: : :\n", "utf8");
+
+    const dangerfilePath = path.join(here, "..", "src", "dangerfile.js");
+    const resolved = require.resolve(dangerfilePath);
+    const prevEnv = process.env["HORNERO_POLICY_PATH"];
+    const g = globalThis as Record<string, unknown>;
+    const prevGlobals = {
+      danger: g["danger"],
+      fail: g["fail"],
+      warn: g["warn"],
+      message: g["message"],
+      schedule: g["schedule"],
+    };
+
+    let scheduledPromise: Promise<unknown> | undefined;
+    g["danger"] = {
+      github: { pr: { title: "fix: test", body: "", user: { login: "alice" }, labels: [] }, issue: { labels: [] } },
+      git: { commits: [], modified_files: [], created_files: [], deleted_files: [], additions: 1, deletions: 0 },
+    };
+    g["fail"] = () => {};
+    g["warn"] = () => {};
+    g["message"] = () => {};
+    g["schedule"] = (fnOrPromise: Promise<unknown> | (() => Promise<unknown>)) => {
+      scheduledPromise = typeof fnOrPromise === "function" ? fnOrPromise() : fnOrPromise;
+    };
+    process.env["HORNERO_POLICY_PATH"] = broken;
+    delete require.cache[resolved];
+
+    try {
+      require(resolved);
+      assert.ok(scheduledPromise instanceof Promise, "dangerfile must register promise via schedule()");
+      await assert.rejects(scheduledPromise, /Failed to load governance policy/);
+    } finally {
+      delete require.cache[resolved];
+      if (prevEnv === undefined) delete process.env["HORNERO_POLICY_PATH"];
+      else process.env["HORNERO_POLICY_PATH"] = prevEnv;
+      for (const [k, v] of Object.entries(prevGlobals)) {
+        if (v === undefined) delete g[k];
+        else g[k] = v;
+      }
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
   });
 
   void it("dangerfile build: no tsc helpers (cleanDangerfile would strip them)", () => {

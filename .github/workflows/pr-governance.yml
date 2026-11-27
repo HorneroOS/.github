@@ -5,8 +5,10 @@
 # with checkout + execution of PR code). Least-privilege permissions below.
 #
 # Two checkouts, two roles:
-# - the CALLER repo at the default path: Danger computes the PR diff and
-#   reads `.github/hornero-governance.yml` from here (cwd stays here);
+# - the CALLER repo at the default path: Danger computes the PR diff from
+#   here (cwd stays here), while `.github/hornero-governance.yml` is
+#   extracted from the trusted base branch (`origin/$BASE_REF`) so a PR
+#   cannot weaken or bypass its own governance policy;
 # - the ENGINE repo (HorneroOS/.github) at `inputs.engine-ref` under
 #   `.governance-engine`: provides the TypeScript Danger engine only.
 
@@ -24,19 +26,23 @@ name: PR governance (reusable)
         required: false
         default: "22.22.0"
         type: string
+    secrets:
       github-token:
-        description: "Token Danger uses to comment (defaults to GITHUB_TOKEN)."
+        description: "Optional token Danger uses to comment (defaults to GITHUB_TOKEN)."
         required: false
-        default: ""
-        type: string
 
 permissions:
   contents: read
   pull-requests: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   danger:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
       pull-requests: write
@@ -45,6 +51,27 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
+
+      - name: Load trusted governance policy from base branch
+        shell: bash
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+          if [[ -n "$BASE_REF" ]]; then
+            if ! git rev-parse --verify --quiet "refs/remotes/origin/${BASE_REF}" >/dev/null; then
+              git fetch --no-tags --depth=1 origin "${BASE_REF}"
+            fi
+            POLICY_OUT="${RUNNER_TEMP}/hornero-governance-base.yml"
+            rm -f "$POLICY_OUT"
+            for rel in .github/hornero-governance.yml .github/hornero-governance.yaml; do
+              if git cat-file -e "origin/${BASE_REF}:${rel}" 2>/dev/null; then
+                git show "origin/${BASE_REF}:${rel}" > "$POLICY_OUT"
+                break
+              fi
+            done
+            echo "HORNERO_POLICY_PATH=${POLICY_OUT}" >> "$GITHUB_ENV"
+          fi
 
       - name: Checkout governance engine
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -71,13 +98,13 @@ jobs:
       - name: Run Danger (same-repo PR)
         if: ${{ !github.event.pull_request.head.repo.fork }}
         env:
-          GITHUB_TOKEN: ${{ inputs.github-token != '' && inputs.github-token || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.github-token || secrets.GITHUB_TOKEN }}
         run: .governance-engine/governance/danger/node_modules/.bin/danger ci --dangerfile .governance-engine/governance/danger/dist/src/dangerfile.js
 
       - name: Run Danger (fork PR — step summary)
         if: ${{ github.event.pull_request.head.repo.fork }}
         env:
-          GITHUB_TOKEN: ${{ inputs.github-token != '' && inputs.github-token || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.github-token || secrets.GITHUB_TOKEN }}
         run: |
           set +e
           OUTPUT=$(.governance-engine/governance/danger/node_modules/.bin/danger ci --text-only --dangerfile .governance-engine/governance/danger/dist/src/dangerfile.js 2>&1)

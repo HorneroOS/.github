@@ -14,8 +14,8 @@ expectations are not met.
 
 ## Reporting
 
-To report a violation, open an issue in
-[HorneroOS/.github](https://github.com/HorneroOS/.github/issues) marked as
-confidential where possible, or contact the organization owners through the
+Do not post sensitive or personal details in a public issue or pull request —
+GitHub issues in public repositories are visible to everyone. To report a
+violation privately, contact the organization owners through the
 [HorneroOS people page](https://github.com/orgs/HorneroOS/people). Reports are
 handled discreetly.

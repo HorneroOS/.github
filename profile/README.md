@@ -53,9 +53,12 @@ test cards and technical drawing sheets — executed with modern restraint.
   tabular numerals in IBM Plex, and Hornero Glyphs for icons.
 - **Legible at a glance.** Every theme passes WCAG AA contrast checks, with
   a high-contrast mode and reduced motion built in.
-- **Themes own colour.** Signal Night (the default), Signal Day, Signal High
-  Contrast and regional Hornero Originals are authored palettes; the
-  wallpaper never recolours the interface.
+- **Themes own colour by default.** Signal Night (the default), Signal Day,
+  Signal High Contrast and regional Hornero Originals are authored palettes;
+  wallpapers do not recolour the interface unless you opt into
+  [Hornero Chromatic](https://github.com/HorneroOS/docs/blob/main/development/rfc-0002-hornero-chromatic.md),
+  which synthesizes contrast-checked Signal roles from a wallpaper or chosen
+  colour.
 
 Signal replaces the Material 3 design system the shell inherited. It is
 defined in [RFC 0001](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md)
@@ -117,7 +120,7 @@ then check the [edition catalogue](https://horneroos.com/editions/) and the
 | [shell](https://github.com/HorneroOS/shell) | Hornero Shell: bars, launcher, dashboard, notifications, Control Center, PluginKit and desktop interactions. |
 | [config](https://github.com/HorneroOS/config) | Signal token schema and themes, desktop defaults, wallpapers, brand assets and system configuration. |
 | [plugins](https://github.com/HorneroOS/plugins) | First-party shell extensions and the curated extension catalogue. |
-| [greeter](https://github.com/HorneroOS/greeter) | SDDM login experience and its packaged visual assets. |
+| [greeter](https://github.com/HorneroOS/greeter) | SDDM theme and native greetd login experiences on Hornero Signal. |
 | [installer](https://github.com/HorneroOS/installer) | Provisional installation workflow and media; check its README for validation status. |
 | [docs](https://github.com/HorneroOS/docs) | User, contributor and architecture documentation, including the design RFCs. |
 | [website](https://github.com/HorneroOS/website) | The official product site, captures and documentation experience. |
