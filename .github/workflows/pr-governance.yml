@@ -27,7 +27,7 @@ name: PR governance (reusable)
         default: "22.22.0"
         type: string
     secrets:
-      github_token:
+      danger_token:
         description: "Optional token Danger uses to comment (defaults to GITHUB_TOKEN)."
         required: false
 
@@ -94,13 +94,13 @@ jobs:
       - name: Run Danger (same-repo PR)
         if: ${{ !github.event.pull_request.head.repo.fork }}
         env:
-          GITHUB_TOKEN: ${{ secrets.github_token || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.danger_token || secrets.GITHUB_TOKEN }}
         run: .governance-engine/governance/danger/node_modules/.bin/danger ci --dangerfile .governance-engine/governance/danger/dist/src/dangerfile.js
 
       - name: Run Danger (fork PR — step summary)
         if: ${{ github.event.pull_request.head.repo.fork }}
         env:
-          GITHUB_TOKEN: ${{ secrets.github_token || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.danger_token || secrets.GITHUB_TOKEN }}
         run: |
           set +e
           OUTPUT=$(.governance-engine/governance/danger/node_modules/.bin/danger ci --text-only --dangerfile .governance-engine/governance/danger/dist/src/dangerfile.js 2>&1)
