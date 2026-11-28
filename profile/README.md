@@ -30,8 +30,9 @@ project's [roots and design history](https://horneroos.com/roots/).
 
 HorneroOS composes the system, the desktop and the everyday tools into one
 product. Every edition shares a Wayland-first desktop built around Hornero
-Shell; Hyprland is the supported default compositor, and Niri is
-experimental.
+Shell 1.6 (with Signal Flight Welcome, Hornero Apps, Hornero Companion and
+35 official plugins); both **Hyprland** (default) and **Niri** are supported
+compositors.
 
 - **Desktop** — the everyday workstation for development and daily work.
 - **Studio** — Desktop plus a creative toolchain: PipeWire with JACK,
@@ -64,31 +65,31 @@ Signal replaces the Material 3 design system the shell inherited. It is
 defined in [RFC 0001](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md)
 and the [Signal Visual Language](https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md),
 and tracked in [HorneroOS/.github#28](https://github.com/HorneroOS/.github/issues/28).
-Hornero Signal is live on `main` and ships in the `v0.2.0-preview41` Preview
-release (including the AUR / Install-on-Arch path); shell surfaces continue to
-be refined.
+Hornero Signal is live across all supported editions and ships in
+`v0.2.0-preview42` (signed live/installable ISO, preinstalled QCOW2 VM
+image, and Arch/AUR packages); shell surfaces continue to evolve.
 
 ## Where the project stands
 
-HorneroOS is pre-release software. The
+HorneroOS is daily-driven in production across multiple physical workstations
+and validated on both UEFI and BIOS KVM guests. The
 [edition catalogue](https://github.com/HorneroOS/hornero/blob/main/editions/catalogue.yaml)
-and release notes are the source of truth for maturity; package availability
-alone does not mean an edition is supported.
+and release notes are the source of truth for maturity.
 
 | Product area | Current status |
 | --- | --- |
-| **HorneroOS Desktop** | Preview. Hyprland is the supported default compositor. |
-| **HorneroOS Studio** | Preview. Installable from the Preview ISO; hardware validation is pending. |
-| **HorneroOS Gaming** | Preview. Installable from the Preview ISO; hardware validation is pending. |
-| **Niri desktop session** | Experimental. Capability and workflow coverage is still evolving. |
-| **Server and Agents** | Planned. Not offered as installable editions. |
-| **Hornero Signal** | Live on `main` and shipped in `v0.2.0-preview41`; shell surfaces continue to be refined. |
-| **Installation & AUR** | `v0.2.0-preview41` is available via the AUR / Install-on-Arch path and signed Preview ISO media (SHA-256 + GPG; VM-tested on UEFI unencrypted). Legacy BIOS, encrypted installs and physical hardware remain under validation. |
+| **HorneroOS Desktop** | Supported. Daily-driven on physical hardware and validated on UEFI/BIOS KVM; Hyprland (default) and Niri supported. |
+| **HorneroOS Studio** | Supported. Daily-driven on physical hardware and validated on UEFI/BIOS KVM; composable pro-audio and creative toolchains. |
+| **HorneroOS Gaming** | Supported. Daily-driven on physical hardware and validated on UEFI/BIOS KVM; cross-vendor Mesa/Vulkan, 32-bit compat, GameMode, Gamescope and MangoHud. |
+| **Hyprland & Niri sessions** | Supported. Hyprland is the default compositor; Niri is a supported first-class session. **labwc** remains Planned. |
+| **Server and Agents** | Planned. Not offered as installable editions yet. |
+| **Hornero Signal & Shell** | Supported. Hornero Shell 1.6 with Signal Flight Welcome, Hornero Apps, Hornero Companion and 35 official plugins. |
+| **Installation, VM & AUR** | Supported. Signed live/installable ISO (SHA-256 + GPG), preinstalled QCOW2 VM image and Arch/AUR packages, validated across physical workstations plus UEFI and BIOS KVM. |
 
 See the [release page](https://horneroos.com/releases) and the
-[installation status](https://horneroos.com/install) before trying a build.
-Back up important data and use disposable hardware or a virtual machine for
-preview media.
+[installation guide](https://horneroos.com/install) before installing.
+Always back up important data before modifying partitions on an existing
+machine.
 
 ## Lineage and credits
 
@@ -121,7 +122,7 @@ then check the [edition catalogue](https://horneroos.com/editions/) and the
 | [config](https://github.com/HorneroOS/config) | Signal token schema and themes, desktop defaults, wallpapers, brand assets and system configuration. |
 | [plugins](https://github.com/HorneroOS/plugins) | First-party shell extensions and the curated extension catalogue. |
 | [greeter](https://github.com/HorneroOS/greeter) | SDDM theme and native greetd login experiences on Hornero Signal. |
-| [installer](https://github.com/HorneroOS/installer) | Provisional installation workflow and media; check its README for validation status. |
+| [installer](https://github.com/HorneroOS/installer) | Signed live/installable ISO, preinstalled QCOW2 VM image and Arch installation workflow. |
 | [docs](https://github.com/HorneroOS/docs) | User, contributor and architecture documentation, including the design RFCs. |
 | [website](https://github.com/HorneroOS/website) | The official product site, captures and documentation experience. |
 | [qa](https://github.com/HorneroOS/qa) | Reproducible graphical and system acceptance evidence. |
@@ -137,9 +138,9 @@ then check the [edition catalogue](https://horneroos.com/editions/) and the
   the website predate Hornero Signal and show the previous appearance until
   Signal captures replace them.
 - **Planning an installation?** Read the [installation repository](https://github.com/HorneroOS/installer)
-  and verify its current maturity before using any media.
-- **Following installer readiness?** Use the [public HorneroOS Installer project](https://github.com/orgs/HorneroOS/projects/1)
-  for acceptance work and the transition to Panda Foss's custom official installer.
+  for the signed live/installable ISO, preinstalled QCOW2 VM image and Arch/AUR install paths.
+- **Following installer development?** Use the [public HorneroOS Installer project](https://github.com/orgs/HorneroOS/projects/1)
+  for ongoing acceptance work and Panda Foss's custom official installer workstream.
 - **Looking for the roadmap?** Every issue lives in the [HorneroOS Roadmap](https://github.com/orgs/HorneroOS/projects/2);
   specialized boards: [Shell & Desktop](https://github.com/orgs/HorneroOS/projects/3),
   [Platform & Release](https://github.com/orgs/HorneroOS/projects/4),

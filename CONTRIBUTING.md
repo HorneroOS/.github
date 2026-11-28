@@ -2,8 +2,8 @@
 
 Thanks for helping build HorneroOS. Contributions are welcome across the
 desktop, configuration, documentation, installer and system-composition work.
-HorneroOS is pre-release software; check the current product catalogue and
-release notes before describing a capability as supported.
+Check the current [edition catalogue](https://github.com/HorneroOS/hornero/blob/main/editions/catalogue.yaml)
+and release notes before describing a capability as supported.
 
 ## Find the right place
 
@@ -70,5 +70,5 @@ behavior, evidence, maintainability, accessibility and security. Participation
 follows the organization [Code of Conduct](CODE_OF_CONDUCT.md).
 
 For installation and release work, clearly distinguish development builds,
-provisional media, previews and supported releases. Never encourage using
-unvalidated media on a machine containing important data.
+unreleased branches and supported releases. Never encourage using unvalidated
+development builds on a machine containing important data.
