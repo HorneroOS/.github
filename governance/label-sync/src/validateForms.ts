@@ -80,6 +80,7 @@ function main(): void {
     { name: "documentation.yml", type: "Task" },
     { name: "task-maintenance.yml", type: "Task" },
     { name: "extension.yml", type: "Feature" },
+    { name: "hardware-report.yml", type: "Task" },
   ];
   let failures = 0;
   for (const { name, type } of forms) {

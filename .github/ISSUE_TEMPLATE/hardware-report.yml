@@ -1,0 +1,120 @@
+name: Hardware compatibility report
+description: Submit bare-metal or VM hardware test results (working or failing).
+title: "hardware: "
+labels:
+  - type:maintenance
+  - status:needs-triage
+type: Task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for testing HorneroOS on real hardware or a hypervisor.
+        Sanitize usernames, hostnames, serial numbers, Wi-Fi SSIDs, and
+        tokens before posting.
+  - type: input
+    id: machine
+    attributes:
+      label: Machine / Hypervisor model
+      description: Laptop/desktop model, motherboard, or hypervisor name and version.
+      placeholder: ThinkPad T14 Gen 3 AMD / QEMU 9.1 (VirGL)
+    validations:
+      required: true
+  - type: input
+    id: artifact
+    attributes:
+      label: ISO or AUR package versions
+      description: Exact ISO filename/tag or installed AUR package versions.
+      placeholder: horneroos-2026.10-preview32-x86_64.iso or hornero-shell 1.6.0-2
+    validations:
+      required: true
+  - type: dropdown
+    id: install-path
+    attributes:
+      label: Install / try path
+      options:
+        - Live USB (ISO)
+        - Full ISO install (Calamares, UEFI unencrypted)
+        - Full ISO install (Calamares, UEFI + LUKS)
+        - Full ISO install (Legacy BIOS)
+        - Existing Arch Linux (AUR)
+        - Virtual machine
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: compositor
+    attributes:
+      label: Edition and compositor
+      options:
+        - Desktop / Hyprland
+        - Studio / Hyprland
+        - Gaming / Hyprland
+        - Desktop / Niri (experimental)
+        - Other (specify in notes)
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Overall result
+      options:
+        - Boots and works end-to-end
+        - Boots with workarounds (e.g. Safe Graphics, software fallback)
+        - Fails to boot or blocks usage
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: hardware-specs
+    attributes:
+      label: CPU, GPU, audio, and network details
+      description: Summarize GPU wiring (integrated/hybrid/discrete), Wi-Fi chip, and audio device.
+      placeholder: |
+        - CPU: AMD Ryzen 7 6850U
+        - GPU: Radeon 680M (amdgpu)
+        - Display: 1920x1200 eDP + external USB-C HDMI
+        - Wi-Fi / BT: Qualcomm QCNFA765
+    validations:
+      required: true
+  - type: textarea
+    id: working-and-broken
+    attributes:
+      label: What worked and what failed
+      description: Cover boot/greeter, display/Wayland, PipeWire audio, Wi-Fi/BT, sleep/suspend, and gaming/studio if tested.
+      placeholder: |
+        - Boot / Greeter: OK
+        - Wayland / Shell: OK
+        - Audio / Wi-Fi: OK
+        - Issues observed: suspend wakes back up immediately on lid close.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitized diagnostics
+      description: Paste output from `horneroctl doctor`, `lspci -nnk`, and relevant `journalctl -b -k -p warning --no-pager` lines.
+      render: text
+    validations:
+      required: false
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area (optional)
+      description: Included for routing; does not apply a GitHub label.
+      options:
+        - area:infra
+        - Not sure
+      default: 0
+    validations:
+      required: false
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for this hardware model.
+          required: true
+        - label: I removed usernames, hostnames, serials, SSIDs, and secrets.
+          required: true
